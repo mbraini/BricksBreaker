@@ -1,4 +1,7 @@
 package Game;
+import Panels.*;
+
+import javax.swing.*;
 
 public class Game {
 

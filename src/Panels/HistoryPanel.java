@@ -1,6 +1,7 @@
 package Panels;
 
 import javax.swing.*;
+import Game.*;
 
 public class HistoryPanel extends JPanel {
     public HistoryPanel(){

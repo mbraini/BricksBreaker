@@ -1,5 +1,6 @@
 package Game;
 
+import Items.Brick;
 import Panels.BricksBreaker;
 import Panels.GamePanel;
 
@@ -26,7 +27,12 @@ public class GameLoop extends Thread{
     }
 
     public void update(){
-        System.out.println("HELLO");
+        bricksBreaker.repaint();
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                ((Brick)(BricksBreaker.oigArrayList.get(i))).gravity();
+            }
+        }
     }
 
 }

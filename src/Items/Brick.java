@@ -1,9 +1,12 @@
 package Items;
 
+import Interfaces.Gravity;
+import Panels.BricksBreaker;
+
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Brick extends OIG{
+public class Brick extends OIG implements Gravity {
     int width;
     int height;
     int HP;
@@ -36,7 +39,8 @@ public class Brick extends OIG{
 
     @Override
     public void draw(Graphics g) {
-        g.drawRect(x ,y ,width ,height);
+        g.setColor(BricksBreaker.brickColor);
+        g.fillRect(x ,y ,width - 3 ,height - 3);
     }
 
     public int getWidth() {
@@ -61,5 +65,10 @@ public class Brick extends OIG{
 
     public void setHP(int HP) {
         this.HP = HP;
+    }
+
+    @Override
+    public void gravity() {
+        y += BricksBreaker.gravity;
     }
 }

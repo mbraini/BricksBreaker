@@ -19,7 +19,7 @@ public class GameLoop extends Thread{
         while (bricksBreaker.isRunning){
             update();
             try {
-                Thread.sleep(10);
+                Thread.sleep(BricksBreaker.REFRESH_RATE);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class BricksBreaker extends JPanel {
     public final static int GAME_WIDTH =Game.GAME_WIDTH;
     public final static int GAME_HEIGHT =Game.GAME_HEIGHT * 9 / 10;
+    public final static int REFRESH_RATE = 10;
     public static String username;
     public static String difficulty;
     public static Color ballColor;
@@ -64,9 +65,6 @@ public class BricksBreaker extends JPanel {
         }
         else if (difficulty.equals("Medium")){
             ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(3);
-            System.out.println(randoms.get(0));
-            System.out.println(randoms.get(1));
-            System.out.println(randoms.get(2));
             for (int i =0 ;i < randoms.size() ;i++){
                 oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP));
             }

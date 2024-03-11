@@ -1,20 +1,21 @@
 package Game;
 
+import Panels.BricksBreaker;
 import Panels.GamePanel;
 
 public class GameLoop extends Thread{
 
-    GamePanel gamePanel;
+    BricksBreaker bricksBreaker;
 
-    public GameLoop(GamePanel gamePanel){
+    public GameLoop(BricksBreaker bricksBreaker){
         super();
-        this.gamePanel = gamePanel;
+        this.bricksBreaker = bricksBreaker;
     }
 
     @Override
     public void run() {
         super.run();
-        while (GamePanel.isRunning){
+        while (bricksBreaker.isRunning){
             update();
             try {
                 Thread.sleep(10);

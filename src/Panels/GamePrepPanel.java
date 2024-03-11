@@ -59,7 +59,7 @@ public class GamePrepPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Color color = JColorChooser.showDialog(null, "Pick The Ball Color", Color.WHITE);
-                GamePanel.ballColor = color;
+                BricksBreaker.ballColor = color;
                 ballColorL.setBackground(color);
                 ballColorB.setBackground(color);
             }
@@ -70,7 +70,7 @@ public class GamePrepPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String text = userNameT.getText();
                 if (text.length() != 0) {
-                    GamePanel.username = text;
+                    BricksBreaker.username = text;
                     userNameT.setFocusable(false);
                 }
             }
@@ -82,7 +82,7 @@ public class GamePrepPanel extends JPanel {
                 difficultyBE.setBackground(Color.GRAY);
                 difficultyBM.setBackground(Color.WHITE);
                 difficultyBH.setBackground(Color.WHITE);
-                GamePanel.difficulty = "Easy";
+                BricksBreaker.difficulty = "Easy";
             }
         });
 
@@ -92,7 +92,7 @@ public class GamePrepPanel extends JPanel {
                 difficultyBE.setBackground(Color.WHITE);
                 difficultyBM.setBackground(Color.GRAY);
                 difficultyBH.setBackground(Color.WHITE);
-                GamePanel.difficulty = "Medium";
+                BricksBreaker.difficulty = "Medium";
             }
         });
 
@@ -102,7 +102,7 @@ public class GamePrepPanel extends JPanel {
                 difficultyBE.setBackground(Color.WHITE);
                 difficultyBM.setBackground(Color.WHITE);
                 difficultyBH.setBackground(Color.GRAY);
-                GamePanel.difficulty = "Hard";
+                BricksBreaker.difficulty = "Hard";
             }
         });
 
@@ -111,8 +111,6 @@ public class GamePrepPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (userNameT.getText().length() != 0){
                     Game.gamePrepPanel.setVisible(false);
-                    Game.gamePanel.setVisible(true);
-                    GamePanel.isRunning = true;
                     Game.gamePanel.start();
                 }
             }

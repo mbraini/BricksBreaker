@@ -112,6 +112,7 @@ public class GamePrepPanel extends JPanel {
                 if (userNameT.getText().length() != 0){
                     Game.gamePrepPanel.setVisible(false);
                     Game.gamePanel.setVisible(true);
+                    GamePanel.isRunning = true;
                 }
             }
         });

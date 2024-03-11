@@ -4,9 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    static public Color ballColor;
-    static public String username;
-    static public String difficulty;
+    public static String username;
+    public static String difficulty;
+    public static Color ballColor;
+    public static Color brickColor;
+    public static Color backgroundColor;
+    public static Color itemColor;
+
 
     public GamePanel(){
         this.setBackground(Color.BLACK);

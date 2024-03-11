@@ -10,6 +10,11 @@ public class GamePanel extends JPanel {
     public static Color brickColor;
     public static Color backgroundColor;
     public static Color itemColor;
+    public static int ballXVelocity;
+    public static int ballYVelocity;
+    public static int ballPower;
+    public static int brickWidth;
+    public static int brickHeight;
 
 
     public GamePanel(){

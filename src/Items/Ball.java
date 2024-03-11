@@ -6,6 +6,12 @@ import java.util.ArrayList;
 public class Ball extends OIG{
     int radios;
 
+    public Ball(int x ,int y ,int radios){
+        this.x = x;
+        this.y = y;
+        this.radios = radios;
+    }
+
     @Override
     public ArrayList<Point> getMargin() {
         ArrayList<Point> margin = new ArrayList<>();
@@ -18,7 +24,7 @@ public class Ball extends OIG{
         return margin;
     }
 
-    boolean collision(OIG a){
+    public boolean collision(OIG a){
         ArrayList<Point> ballMargin = getMargin();
         ArrayList<Point> aMargin = a.getMargin();
         for (int i = 0 ;i < ballMargin.size() ;i++){
@@ -34,5 +40,14 @@ public class Ball extends OIG{
 
     @Override
     public void draw(Graphics g) {
+        g.drawOval(x ,y ,radios ,radios);
+    }
+
+    public int getRadios() {
+        return radios;
+    }
+
+    public void setRadios(int radios) {
+        this.radios = radios;
     }
 }

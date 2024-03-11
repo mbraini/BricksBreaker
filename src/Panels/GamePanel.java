@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
     public static int brickHeight;
     public static boolean isRunning;
     public static ArrayList<OIG> oigArrayList;
+    public GameLoop gameLoop;
 
 
     public GamePanel(){
@@ -32,8 +33,13 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        for (int i = 0 ;i <oigArrayList.size() ;i++){
-            oigArrayList.get(i).draw(g);
-        }
+//        for (int i = 0 ;i <oigArrayList.size() ;i++){
+//            oigArrayList.get(i).draw(g);
+//        }
+    }
+
+    public void start(){
+        gameLoop = new GameLoop(this);
+        gameLoop.start();
     }
 }

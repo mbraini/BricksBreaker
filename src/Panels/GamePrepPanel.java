@@ -113,6 +113,7 @@ public class GamePrepPanel extends JPanel {
                     Game.gamePrepPanel.setVisible(false);
                     Game.gamePanel.setVisible(true);
                     GamePanel.isRunning = true;
+                    Game.gamePanel.start();
                 }
             }
         });

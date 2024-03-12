@@ -2,6 +2,7 @@ package Panels;
 
 import Game.*;
 import Game.GameLoop;
+import Items.Ball;
 import Items.Brick;
 import Items.OIG;
 
@@ -23,8 +24,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color itemColor;
     public static int ballVelocity = 5;
     public static int ballPower = 1;
-    public static int ballCount = 1;
-    public static int ballRadios = 20;
+    public static int ballCount = 10;
+    public static int ballRadios = 10;
     public static int gravity = 1;
     public static int brickWidth = GAME_WIDTH / 6;
     public static int brickHeight = GAME_HEIGHT / 9;
@@ -34,6 +35,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Point aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static Point aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static ArrayList<OIG> oigArrayList;
+    public static Timer ballAimingTimer;
+    public static final int ballAimingDelay = 70;
     public GameLoop gameLoop;
 
     public BricksBreaker(){
@@ -100,40 +103,67 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        if (aimingFirstPoint.x == x){
-            return;
-        }
-        double m = ((aimingFirstPoint.y - y) / (double)(aimingFirstPoint.x - x));
-        int xm,ym;
-        xm = 0;
-        ym = (int) (aimingFirstPoint.y - m * aimingFirstPoint.x);
-        if (ym >= 0 && ym <= GAME_HEIGHT){
-            aimingSecondPoint = new Point(xm ,ym);
-            GameHelper.aimingCollision(xm ,ym);
-        }
+        if (!inTurn) {
+            int x = e.getX();
+            int y = e.getY();
+            if (aimingFirstPoint.x == x) {
+                return;
+            }
+            double m = ((aimingFirstPoint.y - y) / (double) (aimingFirstPoint.x - x));
+            int xm, ym;
+            xm = 0;
+            ym = (int) (aimingFirstPoint.y - m * aimingFirstPoint.x);
+            if (ym >= 0 && ym <= GAME_HEIGHT) {
+                aimingSecondPoint = new Point(xm, ym);
+                GameHelper.aimingCollision(xm, ym);
+            }
 
-        ym = 0;
-        xm = (int) ((m * aimingFirstPoint.x - aimingFirstPoint.y) / m);
-        if (xm >= 0 && xm <= GAME_WIDTH){
-            aimingSecondPoint = new Point(xm ,ym);
-            GameHelper.aimingCollision(xm ,ym);
-        }
+            ym = 0;
+            xm = (int) ((m * aimingFirstPoint.x - aimingFirstPoint.y) / m);
+            if (xm >= 0 && xm <= GAME_WIDTH) {
+                aimingSecondPoint = new Point(xm, ym);
+                GameHelper.aimingCollision(xm, ym);
+            }
 
-        xm = GAME_WIDTH;
-        ym = (int) (m * (xm - aimingFirstPoint.x) + aimingFirstPoint.y);
-        if (ym >= 0 && ym <= GAME_HEIGHT){
-            aimingSecondPoint = new Point(xm ,ym);
-            GameHelper.aimingCollision(xm ,ym);
+            xm = GAME_WIDTH;
+            ym = (int) (m * (xm - aimingFirstPoint.x) + aimingFirstPoint.y);
+            if (ym >= 0 && ym <= GAME_HEIGHT) {
+                aimingSecondPoint = new Point(xm, ym);
+                GameHelper.aimingCollision(xm, ym);
+            }
         }
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!inTurn){
             inTurn = true;
+            ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (BricksBreaker.inTurn && BricksBreaker.ballCount != 0){
+                        double x,y;
+                        y = BricksBreaker.aimingSecondPoint.y - BricksBreaker.aimingFirstPoint.y;
+                        x = BricksBreaker.aimingSecondPoint.x - BricksBreaker.aimingFirstPoint.x;
+                        double m = x/y;
+                        double yVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity ,2) / (Math.pow(m ,2) + 1));
+                        double xVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity ,2) - Math.pow(yVelocity ,2));
+                        BricksBreaker.oigArrayList.add(new Ball(
+                                BricksBreaker.aimingFirstPoint.x,
+                                BricksBreaker.aimingFirstPoint.y,
+                                xVelocity * (x / Math.abs(x)) ,
+                                yVelocity * (y / Math.abs(y)),
+                                BricksBreaker.ballRadios
+                        ));
+                        BricksBreaker.ballCount--;
+                    }
+                    else {
+                        BricksBreaker.ballAimingTimer.stop();
+                    }
+                }
+            });
+
+            ballAimingTimer.start();
         }
     }
 

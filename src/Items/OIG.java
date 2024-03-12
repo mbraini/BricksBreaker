@@ -10,8 +10,6 @@ public abstract class OIG {
     double xVelocity;
     double yVelocity;
 
-    public abstract ArrayList<Point> getMargin();
-
     public int getX() {
         return x;
     }
@@ -32,7 +30,7 @@ public abstract class OIG {
         return xVelocity;
     }
 
-    public void setxVelocity(int xVelocity) {
+    public void setxVelocity(double xVelocity) {
         this.xVelocity = xVelocity;
     }
 
@@ -40,7 +38,7 @@ public abstract class OIG {
         return yVelocity;
     }
 
-    public void setyVelocity(int yVelocity) {
+    public void setyVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
 

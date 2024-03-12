@@ -1,5 +1,8 @@
 package Game;
 
+import Panels.BricksBreaker;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,6 +20,10 @@ public class GameHelper {
             randoms.remove(randomNumber);
         }
         return randoms;
+    }
+
+    public static void aimingCollision(double x2,double y2){
+
     }
 
 

@@ -22,16 +22,10 @@ public class Brick extends OIG implements Gravity {
     @Override
     public ArrayList<Point> getMargin() {
         ArrayList<Point> margin = new ArrayList<>();
-        int x,y;
         for (int i = 0 ;i < width ;i++){
-            x = this.x - (this.width/2) + i;
-            margin.add(new Point(x ,this.y - (this.height/2)));
-            margin.add(new Point(x ,this.y + (this.height/2)));
-        }
-        for (int i = 0 ;i < height ;i++){
-            y = this.y - (this.height/2) + i;
-            margin.add(new Point(this.x - (this.width/2) ,y));
-            margin.add(new Point(this.x + (this.width/2) ,y));
+            for (int j = 0 ;j < height ;j++){
+                margin.add(new Point(x + i ,y + j));
+            }
         }
         return margin;
     }
@@ -41,6 +35,9 @@ public class Brick extends OIG implements Gravity {
     public void draw(Graphics g) {
         g.setColor(BricksBreaker.brickColor);
         g.fillRect(x ,y ,width - 3 ,height - 3);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Default",Font.BOLD ,20));
+        g.drawString("" + this.getHP() , x + width / 2, y + height / 2);
     }
 
     public int getWidth() {

@@ -7,8 +7,8 @@ public abstract class OIG {
 
     int x;
     int y;
-    int xVelocity;
-    int yVelocity;
+    double xVelocity;
+    double yVelocity;
 
     public abstract ArrayList<Point> getMargin();
 
@@ -28,7 +28,7 @@ public abstract class OIG {
         this.y = y;
     }
 
-    public int getxVelocity() {
+    public double getxVelocity() {
         return xVelocity;
     }
 
@@ -36,7 +36,7 @@ public abstract class OIG {
         this.xVelocity = xVelocity;
     }
 
-    public int getyVelocity() {
+    public double getyVelocity() {
         return yVelocity;
     }
 

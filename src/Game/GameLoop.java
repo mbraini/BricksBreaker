@@ -2,6 +2,7 @@ package Game;
 
 import Items.Ball;
 import Items.Brick;
+import Items.Item;
 import Panels.BricksBreaker;
 
 public class GameLoop extends Thread{
@@ -28,50 +29,62 @@ public class GameLoop extends Thread{
 
     public void update(){
         bricksBreaker.repaint();
-        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
-            if (BricksBreaker.oigArrayList.get(i) instanceof Brick && !BricksBreaker.inTurn){
-//                ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
-            }
-            if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
-                Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
-                if (ball.getX() <= BricksBreaker.ballRadios || ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios) {
-                    ball.setxVelocity(-ball.getxVelocity());
+        if (!BricksBreaker.inTurn) {
+            for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                    ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
-                else if (ball.getY() <= BricksBreaker.ballRadios){
-                    ball.setyVelocity(-ball.getyVelocity());
+                if (BricksBreaker.oigArrayList.get(i) instanceof Item){
+                    ((Item)BricksBreaker.oigArrayList.get(i)).move();
                 }
-
-                ///////////////////////////
-
-                for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
-                    if (BricksBreaker.oigArrayList.get(j) instanceof Brick){
-                        if (((Brick)BricksBreaker.oigArrayList.get(j)).CornersCollision((Ball)BricksBreaker.oigArrayList.get(i))){
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).setyVelocity(-((Ball)BricksBreaker.oigArrayList.get(i)).getyVelocity());
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).setxVelocity(-((Ball)BricksBreaker.oigArrayList.get(i)).getxVelocity());
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).move();
-                            ((Brick)BricksBreaker.oigArrayList.get(j)).setHP(((Brick)BricksBreaker.oigArrayList.get(j)).getHP() - 1);
-                        }
-                        else if (((Brick)BricksBreaker.oigArrayList.get(j)).TopAndBottCollision((Ball)BricksBreaker.oigArrayList.get(i))){
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).setyVelocity(-((Ball)BricksBreaker.oigArrayList.get(i)).getyVelocity());
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).move();
-                            ((Brick)BricksBreaker.oigArrayList.get(j)).setHP(((Brick)BricksBreaker.oigArrayList.get(j)).getHP() - 1);
-                        }
-                        else if (((Brick)BricksBreaker.oigArrayList.get(j)).LeftAndRightCollision((Ball)BricksBreaker.oigArrayList.get(i))){
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).setxVelocity(-((Ball)BricksBreaker.oigArrayList.get(i)).getxVelocity());
-                            ((Ball)BricksBreaker.oigArrayList.get(i)).move();
-                            ((Brick)BricksBreaker.oigArrayList.get(j)).setHP(((Brick)BricksBreaker.oigArrayList.get(j)).getHP() - 1);
-                        }
-                    }
-                }
-
-                ///////////////////////////
-                ((Ball)BricksBreaker.oigArrayList.get(i)).move();
             }
         }
-        checkBricks();
+
+        else {
+            for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                    Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
+                    checkBorderCollision(ball);
+                    ball.move();
+                    for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
+                        if (BricksBreaker.oigArrayList.get(j) instanceof Brick){
+                            Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
+                            BrickCollisionCheck(brick ,ball);
+                        }
+                    }
+
+                    ///////////ball reaches The End
+
+                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
+                        BricksBreaker.oigArrayList.remove(i);
+                        if (BallsRemoved()){
+                            BricksBreaker.inTurn = false;
+                            bricksBreaker.addBricks();
+                        }
+                        break;
+                    }
+                }
+            }
+            checkBricksHP();
+        }
     }
 
-    void checkBricks(){
+    private boolean BallsRemoved() {
+        int ballCount = 0;
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                ballCount++;
+            }
+        }
+        if (ballCount == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    void checkBricksHP(){
         for (int i = 0; i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
                 if (((Brick)BricksBreaker.oigArrayList.get(i)).getHP() == 0){
@@ -79,6 +92,35 @@ public class GameLoop extends Thread{
                 }
             }
         }
+    }
+
+    void checkBorderCollision(Ball ball){
+        if (ball.getX() <= BricksBreaker.ballRadios || ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios) {
+            ball.setxVelocity(-ball.getxVelocity());
+        }
+        else if (ball.getY() <= BricksBreaker.ballRadios){
+            ball.setyVelocity(-ball.getyVelocity());
+        }
+    }
+
+    void BrickCollisionCheck(Brick brick ,Ball ball){
+        if (brick.CornersCollision(ball)){
+            ball.setxVelocity(-ball.getxVelocity());
+            ball.setyVelocity(-ball.getyVelocity());
+            brick.setHP(brick.getHP() - 1);
+            ball.move();
+        }
+        else if (brick.TopAndBottCollision(ball)){
+            ball.setyVelocity(-ball.getyVelocity());
+            brick.setHP(brick.getHP() - 1);
+            ball.move();
+        }
+        else if (brick.LeftAndRightCollision(ball)){
+            ball.setxVelocity(-ball.getxVelocity());
+            brick.setHP(brick.getHP() - 1);
+            ball.move();
+        }
+
     }
 
 }

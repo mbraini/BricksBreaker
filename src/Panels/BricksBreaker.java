@@ -25,6 +25,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int ballVelocity = 5;
     public static int ballPower = 1;
     public static int ballCount = 1;
+    public static int currentBallAimed = 0;
     public static int ballRadios = 10;
     public static int gravity = 1;
     public static int brickWidth = GAME_WIDTH / 6;
@@ -141,7 +142,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (BricksBreaker.inTurn && BricksBreaker.ballCount != 0){
+                    if (BricksBreaker.inTurn && BricksBreaker.currentBallAimed != ballCount){
                         double x,y;
                         y = BricksBreaker.aimingSecondPoint.y - BricksBreaker.aimingFirstPoint.y;
                         x = BricksBreaker.aimingSecondPoint.x - BricksBreaker.aimingFirstPoint.x;
@@ -155,9 +156,10 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                                 yVelocity * (y / Math.abs(y)),
                                 BricksBreaker.ballRadios
                         ));
-                        BricksBreaker.ballCount--;
+                        BricksBreaker.currentBallAimed++;
                     }
                     else {
+                        currentBallAimed = 0;
                         BricksBreaker.ballAimingTimer.stop();
                     }
                 }

@@ -1,5 +1,7 @@
 package Items;
 
-public abstract class Item extends OIG{
+import Interfaces.Moveable;
+
+public abstract class Item extends OIG implements Moveable {
 
 }

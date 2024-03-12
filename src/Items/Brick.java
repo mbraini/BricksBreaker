@@ -98,4 +98,15 @@ public class Brick extends OIG implements Gravity {
 
         return false;
     }
+
+    public void Break(){
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                if (BricksBreaker.oigArrayList.get(i).getX() == getX() && BricksBreaker.oigArrayList.get(i).getY() == getY()){
+                    BricksBreaker.oigArrayList.remove(i);
+                    break;
+                }
+            }
+        }
+    }
 }

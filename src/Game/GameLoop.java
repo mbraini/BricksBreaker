@@ -68,6 +68,17 @@ public class GameLoop extends Thread{
                 ((Ball)BricksBreaker.oigArrayList.get(i)).move();
             }
         }
+        checkBricks();
+    }
+
+    void checkBricks(){
+        for (int i = 0; i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                if (((Brick)BricksBreaker.oigArrayList.get(i)).getHP() == 0){
+                    ((Brick)BricksBreaker.oigArrayList.get(i)).Break();
+                }
+            }
+        }
     }
 
 }

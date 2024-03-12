@@ -136,7 +136,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!inTurn){
+        if (!inTurn && aimingSecondPoint.x != aimingFirstPoint.x && aimingSecondPoint.y != aimingFirstPoint.y){
             inTurn = true;
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
                 @Override

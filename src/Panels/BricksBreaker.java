@@ -22,7 +22,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color brickColor = Color.WHITE;
     public static Color backgroundColor;
     public static Color itemColor;
-    public static int ballVelocity = 5;
+    public static int ballVelocity = 8;
     public static int ballPower = 1;
     public static int ballCount = 1;
     public static int currentBallAimed = 0;
@@ -64,6 +64,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         oigArrayList = new ArrayList<>();
         gameLoop = new GameLoop(this);
         isRunning = true;
+        GamePanel.pt.start();
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
 
@@ -187,5 +188,14 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public void pushBricks() {
+        for (int i = 0; i < oigArrayList.size() ;i++){
+            if (oigArrayList.get(i) instanceof Brick) {
+                Brick brick = (Brick) oigArrayList.get(i);
+                brick.setY(brick.getY() + brick.getHeight());
+            }
+        }
     }
 }

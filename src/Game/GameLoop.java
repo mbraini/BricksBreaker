@@ -4,6 +4,7 @@ import Items.Ball;
 import Items.Brick;
 import Items.Item;
 import Panels.BricksBreaker;
+import Panels.GamePanel;
 
 public class GameLoop extends Thread{
 
@@ -24,6 +25,7 @@ public class GameLoop extends Thread{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            GamePanel.pt.addTime(BricksBreaker.REFRESH_RATE);
         }
     }
 
@@ -58,8 +60,7 @@ public class GameLoop extends Thread{
                     if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
                         BricksBreaker.oigArrayList.remove(i);
                         if (BallsRemoved()){
-                            BricksBreaker.inTurn = false;
-                            bricksBreaker.addBricks();
+                            nextTurn();
                         }
                         break;
                     }
@@ -87,7 +88,7 @@ public class GameLoop extends Thread{
     void checkBricksHP(){
         for (int i = 0; i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
-                if (((Brick)BricksBreaker.oigArrayList.get(i)).getHP() == 0){
+                if (((Brick)BricksBreaker.oigArrayList.get(i)).getHP() <= 0){
                     ((Brick)BricksBreaker.oigArrayList.get(i)).Break();
                 }
             }
@@ -97,9 +98,11 @@ public class GameLoop extends Thread{
     void checkBorderCollision(Ball ball){
         if (ball.getX() <= BricksBreaker.ballRadios || ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios) {
             ball.setxVelocity(-ball.getxVelocity());
+            ball.move();
         }
         else if (ball.getY() <= BricksBreaker.ballRadios){
             ball.setyVelocity(-ball.getyVelocity());
+            ball.move();
         }
     }
 
@@ -107,20 +110,27 @@ public class GameLoop extends Thread{
         if (brick.CornersCollision(ball)){
             ball.setxVelocity(-ball.getxVelocity());
             ball.setyVelocity(-ball.getyVelocity());
-            brick.setHP(brick.getHP() - 1);
+            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
             ball.move();
         }
         else if (brick.TopAndBottCollision(ball)){
             ball.setyVelocity(-ball.getyVelocity());
-            brick.setHP(brick.getHP() - 1);
+            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
             ball.move();
         }
         else if (brick.LeftAndRightCollision(ball)){
             ball.setxVelocity(-ball.getxVelocity());
-            brick.setHP(brick.getHP() - 1);
+            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
             ball.move();
         }
+    }
 
+    void nextTurn(){
+        BricksBreaker.ballCount ++;
+        BricksBreaker.currentBricksHP++;
+        BricksBreaker.inTurn = false;
+        bricksBreaker.pushBricks();
+        bricksBreaker.addBricks();
     }
 
 }

@@ -2,6 +2,7 @@ package Items;
 
 import Interfaces.Gravity;
 import Panels.BricksBreaker;
+import Panels.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class Brick extends OIG implements Gravity {
     int width;
     int height;
     int HP;
+    int HPI;
 
     public Brick(int x ,int y ,int width ,int height ,int HP){
         this.x = x;
@@ -17,6 +19,7 @@ public class Brick extends OIG implements Gravity {
         this.width = width;
         this.height = height;
         this.HP = HP;
+        HPI = HP;
     }
 
 
@@ -103,6 +106,7 @@ public class Brick extends OIG implements Gravity {
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
                 if (BricksBreaker.oigArrayList.get(i).getX() == getX() && BricksBreaker.oigArrayList.get(i).getY() == getY()){
+                    GamePanel.pt.addPoint(HPI - GamePanel.pt.getTime() * (0.1) / 1000);
                     BricksBreaker.oigArrayList.remove(i);
                     break;
                 }

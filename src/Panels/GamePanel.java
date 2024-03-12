@@ -7,8 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
-    BricksBreaker bricksBreaker;
-    PT pt;
+    public static BricksBreaker bricksBreaker;
+    public static PT pt;
 
     public GamePanel(){
         this.setLayout(null);

@@ -9,6 +9,7 @@ public class PT extends JPanel {
     JLabel timeL;
     JLabel pointL;
     double time;
+    double point;
 
     public double getTime() {
         return time;
@@ -18,15 +19,13 @@ public class PT extends JPanel {
         this.time = time;
     }
 
-    public int getPoint() {
+    public double getPoint() {
         return point;
     }
 
-    public void setPoint(int point) {
+    public void setPoint(double point) {
         this.point = point;
     }
-
-    int point;
 
     public PT(){
         this.setLayout(null);
@@ -39,8 +38,8 @@ public class PT extends JPanel {
     }
 
     public void addPoint(double point){
-        this.point += (int) point;
-        pointL.setText("points : " + this.point);
+        this.point += point;
+        pointL.setText("points : " + (int)this.point);
     }
 
     public void start() {

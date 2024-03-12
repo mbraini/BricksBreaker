@@ -20,7 +20,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static String difficulty;
     public static Color ballColor = Color.WHITE;
     public static Color brickColor = Color.WHITE;
-    public static Color backgroundColor;
+    public static Color backgroundColor = Color.BLACK;
     public static Color itemColor;
     public static int ballVelocity = 8;
     public static int ballPower = 1;
@@ -43,7 +43,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public BricksBreaker(){
         this.setLayout(null);
         this.setBounds(0,Game.GAME_HEIGHT / 10, Game.GAME_WIDTH, Game.GAME_HEIGHT * 9 / 10);
-        this.setBackground(Color.BLACK);
+        this.setBackground(backgroundColor);
     }
 
     @Override

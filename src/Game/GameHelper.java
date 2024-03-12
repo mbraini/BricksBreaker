@@ -16,7 +16,7 @@ public class GameHelper {
         }
         int randomNumber;
         for (int i = 0 ;i < 6-count ;i++){
-            randomNumber = random.nextInt(0,randoms.size());
+            randomNumber = random.nextInt(randoms.size());
             randoms.remove(randomNumber);
         }
         return randoms;

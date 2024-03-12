@@ -58,4 +58,44 @@ public class Brick extends OIG implements Gravity {
     public void gravity() {
         y += BricksBreaker.gravity;
     }
+
+    public boolean TopAndBottCollision(Ball ball){
+        int xm = getX() + BricksBreaker.brickWidth/2 ,ym = getY() + BricksBreaker.brickHeight/2;
+        if (Math.abs(ball.getY() - ym) <= BricksBreaker.brickHeight/2 + BricksBreaker.ballRadios && Math.abs(ball.getX() - xm) <= BricksBreaker.brickWidth/2){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean LeftAndRightCollision(Ball ball){
+        int xm = getX() + BricksBreaker.brickWidth/2 ,ym = getY() + BricksBreaker.brickHeight/2;
+        if (Math.abs(ball.getX() - xm) <= BricksBreaker.brickWidth/2 + BricksBreaker.ballRadios && Math.abs(ball.getY() - ym) <= BricksBreaker.brickHeight/2){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean CornersCollision(Ball ball){
+        int xm = getX(),ym = getY();
+        if (ball.getX() < xm && ball.getY() < ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios ){
+            return true;
+        }
+
+        xm = getX() + BricksBreaker.brickWidth; ym = getY();
+        if (ball.getX() > xm && ball.getY() < ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
+            return true;
+        }
+
+        xm = getX() + BricksBreaker.brickWidth; ym = getY() + BricksBreaker.brickHeight;
+        if (ball.getX() > xm && ball.getY() > ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
+            return true;
+        }
+
+        xm =getX() ;ym = getY() + BricksBreaker.brickHeight;
+        if (ball.getX() < xm && ball.getY() > ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
+            return true;
+        }
+
+        return false;
+    }
 }

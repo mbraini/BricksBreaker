@@ -3,6 +3,7 @@ package Game;
 import Items.Ball;
 import Items.Brick;
 import Items.Item;
+import Items.OrdinaryItem;
 import Panels.BricksBreaker;
 import Panels.GamePanel;
 
@@ -37,7 +38,7 @@ public class GameLoop extends Thread{
                     ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
                 if (BricksBreaker.oigArrayList.get(i) instanceof Item){
-                    ((Item)BricksBreaker.oigArrayList.get(i)).move();
+                    ((Item)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
             }
         }
@@ -52,6 +53,10 @@ public class GameLoop extends Thread{
                         if (BricksBreaker.oigArrayList.get(j) instanceof Brick){
                             Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
                             BrickCollisionCheck(brick ,ball);
+                        }
+                        if (BricksBreaker.oigArrayList.get(j) instanceof OrdinaryItem){
+                            OrdinaryItem item = (OrdinaryItem) BricksBreaker.oigArrayList.get(j);
+                            item.collision(ball);
                         }
                     }
 
@@ -130,7 +135,7 @@ public class GameLoop extends Thread{
         BricksBreaker.currentBricksHP++;
         BricksBreaker.inTurn = false;
         bricksBreaker.pushBricks();
-        bricksBreaker.addBricks();
+        bricksBreaker.addBricksAndItems();
     }
 
 }

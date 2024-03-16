@@ -157,10 +157,11 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public void mouseClicked(MouseEvent e) {
         if (!inTurn && aimingSecondPoint.x != aimingFirstPoint.x && aimingSecondPoint.y != aimingFirstPoint.y){
             inTurn = true;
+            int ballCountClone = ballCount;
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (BricksBreaker.inTurn && BricksBreaker.currentBallAimed != ballCount){
+                    if (BricksBreaker.inTurn && BricksBreaker.currentBallAimed != ballCountClone){
                         double x,y;
                         y = BricksBreaker.aimingSecondPoint.y - BricksBreaker.aimingFirstPoint.y;
                         x = BricksBreaker.aimingSecondPoint.x - BricksBreaker.aimingFirstPoint.x;

@@ -14,14 +14,13 @@ public class SpeedItem extends OrdinaryItem{
         this.x = x;
         this.y = y;
 
-        this.ability = new Timer(15000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("dgkfsdkgf");
-                BricksBreaker.ballVelocity = 8;
-                ability.stop();
-            }
-        });
+//        this.ability = new Timer(15000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                BricksBreaker.ballVelocity = 8;
+//                ability.stop();
+//            }
+//        });
     }
 
     @Override
@@ -31,8 +30,14 @@ public class SpeedItem extends OrdinaryItem{
 
     @Override
     void ability() {
-        BricksBreaker.ballVelocity = 16;
-        ability.start();
+//        BricksBreaker.ballVelocity = 16;
+//        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+//            if (BricksBreaker.oigArrayList.get(i) instanceof Ball) {
+//                BricksBreaker.oigArrayList.get(i).setxVelocity(BricksBreaker.oigArrayList.get(i).getxVelocity() * Math.pow(2, 0.5));
+//                BricksBreaker.oigArrayList.get(i).setyVelocity(BricksBreaker.oigArrayList.get(i).getyVelocity() * Math.pow(2, 0.5));
+//            }
+//        }
+//        ability.start();
     }
 
     @Override

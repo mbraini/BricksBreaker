@@ -61,9 +61,13 @@ public class GameLoop extends Thread{
                     }
 
                     ///////////ball reaches The End
-
+                }
+            }
+            for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                    Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
                     if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
-                        BricksBreaker.oigArrayList.remove(i);
+                        BricksBreaker.oigArrayList.remove(ball);
                         if (BallsRemoved()){
                             nextTurn();
                         }

@@ -39,7 +39,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static final int ballAimingDelay = 70;
     public static Color ballItemColor = Color.GREEN;
     public static Color speedItemColor = Color.RED;
-    public static Color powerItemColor = Color.ORANGE;
+    public static Color powerItemColor = Color.BLUE;
     public GameLoop gameLoop;
 
     public BricksBreaker(){
@@ -52,7 +52,9 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public void paint(Graphics g) {
         super.paint(g);
         for (int i = 0 ;i <oigArrayList.size() ;i++){
-            oigArrayList.get(i).draw(g);
+            if (oigArrayList.get(i).isVisible) {
+                oigArrayList.get(i).draw(g);
+            }
         }
         if (!inTurn){
             paintAiming(g);
@@ -75,38 +77,32 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     }
 
     public void addBricksAndItems(){
-        Random random = new Random();
-        int itemPossibility = random.nextInt(140);
-        Item item;
-        if (itemPossibility < 80){
-            item = new BallItem(0 ,0);
-        }
-        else if (itemPossibility < 110){
-            item = new SpeedItem(0 ,0);
-        }
-        else {
-            item = new PowerItem(0 ,0);
-        }
+        int BrickCount;
         if (difficulty.equals("Easy")){
-            ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(3);
-            for (int i =0 ;i < randoms.size() - 1 ;i++){
-                oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP));
-            }
+            BrickCount = 2;
         }
         else if (difficulty.equals("Medium")){
-            ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(4);
-            for (int i =0 ;i < randoms.size() - 1 ;i++){
-                oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP));
-            }
-            item.setX(randoms.get(3) * GAME_WIDTH/6 + GAME_WIDTH/12);
-            item.setY(GAME_HEIGHT / 18);
+            BrickCount = 3;
+        }
+        else {
+            BrickCount = 4;
+        }
+        ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(BrickCount);
+        for (int i =0 ;i < randoms.size() - 1 ;i++){
+            oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP ,null));
+        }
+        Random random = new Random();
+        int itemPossibility = random.nextInt(300);
+        Item item;
+        if (itemPossibility < 150){
+            item = new DanceLightItem();
+            oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
+            ((DanceLightItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
             oigArrayList.add(item);
         }
         else {
-            ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(5);
-            for (int i =0 ;i < randoms.size() - 1 ;i++){
-                oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP));
-            }
+            item = new SpeedItem(0, 0);
+            oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
     }
 

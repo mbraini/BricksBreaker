@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public abstract class OIG {
 
+    public boolean isVisible = true;
     double x;
     double y;
     double xVelocity;
@@ -44,4 +45,11 @@ public abstract class OIG {
 
     public abstract void draw(Graphics g);
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
 }

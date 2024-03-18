@@ -13,6 +13,7 @@ public class PowerItem extends OrdinaryItem{
     public PowerItem(int x ,int y) {
         this.x = x;
         this.y = y;
+        isVisible = true;
         this.ability = new Timer(15000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

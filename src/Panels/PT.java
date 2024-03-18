@@ -8,7 +8,7 @@ import java.awt.*;
 public class PT extends JPanel {
     JLabel timeL;
     JLabel pointL;
-    double time;
+    static public double time;
     double point;
 
     public double getTime() {

@@ -16,6 +16,7 @@ public class Ball extends OIG implements Moveable {
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
         this.radios = radios;
+        isVisible = true;
     }
 
 

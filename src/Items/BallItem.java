@@ -9,6 +9,7 @@ public class BallItem extends OrdinaryItem{
     public BallItem(int x ,int y) {
         this.x = x;
         this.y = y;
+        isVisible = true;
     }
 
     @Override

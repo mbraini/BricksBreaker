@@ -34,7 +34,9 @@ public class GameLoop extends Thread{
     }
 
     public void update(){
+        bricksBreaker.revalidate();
         bricksBreaker.repaint();
+        bricksBreaker.setBackground(BricksBreaker.backgroundColor);
         if (!BricksBreaker.inTurn) {
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Brick){

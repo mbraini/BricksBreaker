@@ -7,11 +7,6 @@ import java.awt.*;
 
 public class EarthquakeItem extends SpecialItem{
 
-    public EarthquakeItem(Brick brick) {
-        this.x = brick.getX();
-        this.y = brick.getY();
-    }
-
     @Override
     public void gravity() {
         this.y += BricksBreaker.gravity;
@@ -24,6 +19,5 @@ public class EarthquakeItem extends SpecialItem{
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(Game.earthquake ,(int) x ,(int) y ,BricksBreaker.brickWidth ,BricksBreaker.brickHeight ,null ,null);
     }
 }

@@ -14,14 +14,17 @@ public class Brick extends OIG implements Gravity {
     int height;
     int HP;
     int HPI;
+    SpecialItem specialItem;
 
-    public Brick(int x ,int y ,int width ,int height ,int HP){
+    public Brick(int x ,int y ,int width ,int height ,int HP ,SpecialItem specialItem){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.HP = HP;
         HPI = HP;
+        this.specialItem = specialItem;
+        isVisible = true;
     }
 
 
@@ -75,10 +78,22 @@ public class Brick extends OIG implements Gravity {
 
     public void Break(){
         GamePanel.pt.addPoint(HPI - GamePanel.pt.getTime() * (0.1) / 1000);
+        if (specialItem != null){
+            specialItem.ability();
+            BricksBreaker.oigArrayList.remove(specialItem);
+        }
         BricksBreaker.oigArrayList.remove(this);
     }
 
     public void decreesHP(){
         HP--;
+    }
+
+    public SpecialItem getSpecialItem() {
+        return specialItem;
+    }
+
+    public void setSpecialItem(SpecialItem specialItem) {
+        this.specialItem = specialItem;
     }
 }

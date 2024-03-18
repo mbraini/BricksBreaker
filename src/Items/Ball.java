@@ -48,18 +48,12 @@ public class Ball extends OIG implements Moveable {
         yVelocity = -yVelocity;
         move();
         if (hasCollision(bricks)){
-            x = xI;
-            y = yI;
-            xVelocity = xVelocityI;
-            yVelocity = yVelocityI;
+            reset(xI ,yI ,xVelocityI ,yVelocityI);
 
             xVelocity = -xVelocity;
             move();
             if (hasCollision(bricks)){
-                x = xI;
-                y = yI;
-                xVelocity = xVelocityI;
-                yVelocity = yVelocityI;
+                reset(xI ,yI ,xVelocityI ,yVelocityI);
 
                 xVelocity = -xVelocity;
                 yVelocity = -yVelocity;
@@ -93,5 +87,12 @@ public class Ball extends OIG implements Moveable {
             }
         }
         return false;
+    }
+
+    void reset(double x ,double y ,double xVelocity ,double yVelocity){
+        this.x = x;
+        this.y = y;
+        this.xVelocity = xVelocity;
+        this.yVelocity = yVelocity;
     }
 }

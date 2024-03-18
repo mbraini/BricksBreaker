@@ -38,10 +38,10 @@ public class GameLoop extends Thread{
         if (!BricksBreaker.inTurn) {
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
-//                    ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
+                    ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
                 if (BricksBreaker.oigArrayList.get(i) instanceof Item){
-//                    ((Item)BricksBreaker.oigArrayList.get(i)).gravity();
+                    ((Item)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
             }
         }

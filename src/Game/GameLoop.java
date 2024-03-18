@@ -61,13 +61,10 @@ public class GameLoop extends Thread{
                             }
                         }
                     }
+                    if (!bricks.isEmpty()){
+                        ball.collisionFix(bricks);
+                    }
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
-                        if (BricksBreaker.oigArrayList.get(j) instanceof Brick){
-                            Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
-                            if (brick.collision(ball)){
-                                ball.collisionFix(bricks);
-                            }
-                        }
                         if (BricksBreaker.oigArrayList.get(j) instanceof OrdinaryItem){
                             OrdinaryItem item = (OrdinaryItem) BricksBreaker.oigArrayList.get(j);
                             item.collision(ball);

@@ -65,18 +65,25 @@ public class Ball extends OIG implements Moveable {
                     for (int i = 0; i < bricks.size() ;i++){
                         bricks.get(i).decreesHP();
                     }
+                    reset(xI ,yI ,xVelocityI ,yVelocityI);
+                    xVelocity = -xVelocity;
+                    yVelocity = -yVelocity;
                 }
             }
             else {
                 for (int i = 0; i < bricks.size() ;i++){
                     bricks.get(i).decreesHP();
                 }
+                reset(xI ,yI ,xVelocityI ,yVelocityI);
+                xVelocity = -xVelocity;
             }
         }
         else {
             for (int i = 0; i < bricks.size() ;i++){
                 bricks.get(i).decreesHP();
             }
+            reset(xI ,yI ,xVelocityI ,yVelocityI);
+            yVelocity = -yVelocity;
         }
     }
 

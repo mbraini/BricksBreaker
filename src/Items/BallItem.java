@@ -24,6 +24,6 @@ public class BallItem extends OrdinaryItem{
     @Override
     public void draw(Graphics g) {
         g.setColor(BricksBreaker.ballItemColor);
-        g.fillOval(x - BricksBreaker.itemRadios ,y - BricksBreaker.itemRadios ,BricksBreaker.itemRadios * 2 ,BricksBreaker.itemRadios * 2);
+        g.fillOval((int) x - BricksBreaker.itemRadios ,(int) y - BricksBreaker.itemRadios ,BricksBreaker.itemRadios * 2 ,BricksBreaker.itemRadios * 2);
     }
 }

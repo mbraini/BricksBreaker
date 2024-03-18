@@ -7,9 +7,12 @@ import Items.OrdinaryItem;
 import Panels.BricksBreaker;
 import Panels.GamePanel;
 
+import java.util.ArrayList;
+
 public class GameLoop extends Thread{
 
     BricksBreaker bricksBreaker;
+    static public int collision = 0;
 
     public GameLoop(BricksBreaker bricksBreaker){
         super();
@@ -35,10 +38,10 @@ public class GameLoop extends Thread{
         if (!BricksBreaker.inTurn) {
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
-                    ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
+//                    ((Brick)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
                 if (BricksBreaker.oigArrayList.get(i) instanceof Item){
-                    ((Item)BricksBreaker.oigArrayList.get(i)).gravity();
+//                    ((Item)BricksBreaker.oigArrayList.get(i)).gravity();
                 }
             }
         }
@@ -47,20 +50,29 @@ public class GameLoop extends Thread{
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
-                    checkBorderCollision(ball);
                     ball.move();
+                    checkBorderCollision(ball);
+                    ArrayList<Brick> bricks = new ArrayList<>();
+                    for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++) {
+                        if (BricksBreaker.oigArrayList.get(j) instanceof Brick) {
+                            Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
+                            if (brick.collision(ball)) {
+                                bricks.add(brick);
+                            }
+                        }
+                    }
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
                         if (BricksBreaker.oigArrayList.get(j) instanceof Brick){
                             Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
-                            BrickCollisionCheck(brick ,ball);
+                            if (brick.collision(ball)){
+                                ball.collisionFix(bricks);
+                            }
                         }
                         if (BricksBreaker.oigArrayList.get(j) instanceof OrdinaryItem){
                             OrdinaryItem item = (OrdinaryItem) BricksBreaker.oigArrayList.get(j);
                             item.collision(ball);
                         }
                     }
-
-                    ///////////ball reaches The End
                 }
             }
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
@@ -78,6 +90,7 @@ public class GameLoop extends Thread{
             checkBricksHP();
         }
     }
+
 
     private boolean BallsRemoved() {
         int ballCount = 0;
@@ -107,32 +120,12 @@ public class GameLoop extends Thread{
     void checkBorderCollision(Ball ball){
         if (ball.getX() <= BricksBreaker.ballRadios || ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios) {
             ball.setxVelocity(-ball.getxVelocity());
-            ball.move();
         }
-        else if (ball.getY() <= BricksBreaker.ballRadios){
+        if (ball.getY() <= BricksBreaker.ballRadios){
             ball.setyVelocity(-ball.getyVelocity());
-            ball.move();
         }
     }
 
-    void BrickCollisionCheck(Brick brick ,Ball ball){
-        if (brick.CornersCollision(ball)){
-            ball.setxVelocity(-ball.getxVelocity());
-            ball.setyVelocity(-ball.getyVelocity());
-            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
-            ball.move();
-        }
-        else if (brick.TopAndBottCollision(ball)){
-            ball.setyVelocity(-ball.getyVelocity());
-            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
-            ball.move();
-        }
-        else if (brick.LeftAndRightCollision(ball)){
-            ball.setxVelocity(-ball.getxVelocity());
-            brick.setHP(brick.getHP() - BricksBreaker.ballPower);
-            ball.move();
-        }
-    }
 
     void nextTurn(){
         BricksBreaker.ballCount ++;
@@ -140,6 +133,10 @@ public class GameLoop extends Thread{
         BricksBreaker.inTurn = false;
         bricksBreaker.pushBricks();
         bricksBreaker.addBricksAndItems();
+    }
+
+    static public void CheckBallOut(Ball ball){
+
     }
 
 }

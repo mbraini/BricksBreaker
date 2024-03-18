@@ -1,5 +1,7 @@
 package Items;
 
+import Game.GameLoop;
+import Game.MyPoint;
 import Interfaces.Gravity;
 import Panels.BricksBreaker;
 import Panels.GamePanel;
@@ -27,10 +29,10 @@ public class Brick extends OIG implements Gravity {
     @Override
     public void draw(Graphics g) {
         g.setColor(BricksBreaker.brickColor);
-        g.fillRect(x ,y ,BricksBreaker.brickWidth - 3 ,BricksBreaker.brickHeight - 3);
+        g.fillRect((int) x ,(int) y ,BricksBreaker.brickWidth - 3 ,BricksBreaker.brickHeight - 3);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Default",Font.BOLD ,20));
-        g.drawString("" + this.getHP() , x + BricksBreaker.brickWidth / 2, y + BricksBreaker.brickHeight / 2);
+        g.drawString("" + this.getHP() , (int) (x + BricksBreaker.brickWidth / 2) ,(int) (y + BricksBreaker.brickHeight / 2));
     }
 
     public int getWidth() {
@@ -62,55 +64,21 @@ public class Brick extends OIG implements Gravity {
         y += BricksBreaker.gravity;
     }
 
-    public boolean TopAndBottCollision(Ball ball){
-        int xm = getX() + BricksBreaker.brickWidth/2 ,ym = getY() + BricksBreaker.brickHeight/2;
-        if (Math.abs(ball.getY() - ym) <= BricksBreaker.brickHeight/2 + BricksBreaker.ballRadios && Math.abs(ball.getX() - xm) <= BricksBreaker.brickWidth/2){
+    public boolean collision(Ball ball) {
+        double xc = x + BricksBreaker.brickWidth / 2d;
+        double yc = y + BricksBreaker.brickHeight / 2d;
+        if (Math.abs(ball.getX() - xc) < BricksBreaker.brickWidth / 2d + BricksBreaker.ballRadios && Math.abs(ball.getY() - yc) < BricksBreaker.brickHeight / 2d + BricksBreaker.ballRadios) {
             return true;
         }
-        return false;
-    }
-
-    public boolean LeftAndRightCollision(Ball ball){
-        int xm = getX() + BricksBreaker.brickWidth/2 ,ym = getY() + BricksBreaker.brickHeight/2;
-        if (Math.abs(ball.getX() - xm) <= BricksBreaker.brickWidth/2 + BricksBreaker.ballRadios && Math.abs(ball.getY() - ym) <= BricksBreaker.brickHeight/2){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean CornersCollision(Ball ball){
-        int xm = getX(),ym = getY();
-        if (ball.getX() < xm && ball.getY() < ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios ){
-            return true;
-        }
-
-        xm = getX() + BricksBreaker.brickWidth; ym = getY();
-        if (ball.getX() > xm && ball.getY() < ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
-            return true;
-        }
-
-        xm = getX() + BricksBreaker.brickWidth; ym = getY() + BricksBreaker.brickHeight;
-        if (ball.getX() > xm && ball.getY() > ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
-            return true;
-        }
-
-        xm =getX() ;ym = getY() + BricksBreaker.brickHeight;
-        if (ball.getX() < xm && ball.getY() > ym && Math.sqrt(Math.pow(ball.getX()-xm,2) + Math.pow(ball.getY()-ym ,2)) <= BricksBreaker.ballRadios){
-            return true;
-        }
-
         return false;
     }
 
     public void Break(){
-        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
-            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
-                if (BricksBreaker.oigArrayList.get(i).getX() == getX() && BricksBreaker.oigArrayList.get(i).getY() == getY()){
-                    GamePanel.pt.addPoint(HPI - GamePanel.pt.getTime() * (0.1) / 1000);
-                    BricksBreaker.oigArrayList.remove(i);
-                    break;
-                }
-            }
-        }
+        GamePanel.pt.addPoint(HPI - GamePanel.pt.getTime() * (0.1) / 1000);
+        BricksBreaker.oigArrayList.remove(this);
+    }
+
+    public void decreesHP(){
+        HP--;
     }
 }

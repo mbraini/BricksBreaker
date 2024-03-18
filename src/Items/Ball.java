@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 public class Ball extends OIG implements Moveable {
     int radios;
-    public MyPoint dPoint;
 
     public Ball(int x ,int y ,double xVelocity ,double yVelocity ,int radios){
         this.x = x;
         this.y = y;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
-        dPoint = new MyPoint(x ,y);
         this.radios = radios;
     }
 
@@ -24,7 +22,7 @@ public class Ball extends OIG implements Moveable {
     @Override
     public void draw(Graphics g) {
         g.setColor(BricksBreaker.ballColor);
-        g.fillOval(x - BricksBreaker.ballRadios ,y - BricksBreaker.ballRadios ,BricksBreaker.ballRadios * 2 ,BricksBreaker.ballRadios * 2);
+        g.fillOval((int) (x - BricksBreaker.ballRadios) ,(int) (y - BricksBreaker.ballRadios) ,BricksBreaker.ballRadios * 2 ,BricksBreaker.ballRadios * 2);
     }
 
     public int getRadios() {
@@ -37,9 +35,63 @@ public class Ball extends OIG implements Moveable {
 
     @Override
     public void move() {
-        dPoint.setX(dPoint.getX() + xVelocity);
-        dPoint.setY(dPoint.getY() + yVelocity);
-        x = (int)(dPoint.getX());
-        y = (int)(dPoint.getY());
+        x += xVelocity;
+        y += yVelocity;
+    }
+
+    public void collisionFix(ArrayList<Brick> bricks) {
+        double xI = x;
+        double yI = y;
+        double xVelocityI = xVelocity;
+        double yVelocityI = yVelocity;
+
+        yVelocity = -yVelocity;
+        move();
+        if (hasCollision(bricks)){
+            x = xI;
+            y = yI;
+            xVelocity = xVelocityI;
+            yVelocity = yVelocityI;
+
+            xVelocity = -xVelocity;
+            move();
+            if (hasCollision(bricks)){
+                x = xI;
+                y = yI;
+                xVelocity = xVelocityI;
+                yVelocity = yVelocityI;
+
+                xVelocity = -xVelocity;
+                yVelocity = -yVelocity;
+                move();
+                if (hasCollision(bricks)){
+                    BricksBreaker.oigArrayList.remove(this);
+                }
+                else {
+                    for (int i = 0; i < bricks.size() ;i++){
+                        bricks.get(i).decreesHP();
+                    }
+                }
+            }
+            else {
+                for (int i = 0; i < bricks.size() ;i++){
+                    bricks.get(i).decreesHP();
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < bricks.size() ;i++){
+                bricks.get(i).decreesHP();
+            }
+        }
+    }
+
+    boolean hasCollision(ArrayList<Brick> bricks){
+        for (int i = 0 ;i < bricks.size() ;i++){
+            if (bricks.get(i).collision(this)){
+                return true;
+            }
+        }
+        return false;
     }
 }

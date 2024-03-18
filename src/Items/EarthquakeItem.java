@@ -24,6 +24,6 @@ public class EarthquakeItem extends SpecialItem{
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(Game.earthquake ,x ,y ,BricksBreaker.brickWidth ,BricksBreaker.brickHeight ,null ,null);
+        g.drawImage(Game.earthquake ,(int) x ,(int) y ,BricksBreaker.brickWidth ,BricksBreaker.brickHeight ,null ,null);
     }
 }

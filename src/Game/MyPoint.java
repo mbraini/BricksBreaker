@@ -24,4 +24,8 @@ public class MyPoint {
     public void setY(double y) {
         this.y = y;
     }
+
+    public double distance(double x ,double y){
+        return Math.sqrt(Math.pow(this.x - x ,2) + Math.pow(this.y - y ,2));
+    }
 }

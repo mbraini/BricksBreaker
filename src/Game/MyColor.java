@@ -16,31 +16,12 @@ public class MyColor {
 
     public void add(){
         Random random = new Random();
-        int randomR = random.nextInt(26) - 13;
-        int randomG = random.nextInt(26) - 13;
-        int randomB = random.nextInt(26) - 13;
-        r += randomR;
-        g += randomG;
-        b += randomB;
-        if (r > 255){
-            r -=255;
-        }
-        if (g > 255){
-            g -=255;
-        }
-        if (b > 255){
-            b -=255;
-        }
-
-        if (r < 0){
-            r += 255;
-        }
-        if (g < 0){
-            g += 255;
-        }
-        if (b < 0){
-            b += 255;
-        }
+        int randomR = random.nextInt(256);
+        int randomG = random.nextInt(256);
+        int randomB = random.nextInt(256);
+        r = randomR;
+        g = randomG;
+        b = randomB;
     }
 
     public int getR() {

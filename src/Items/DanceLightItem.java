@@ -2,6 +2,7 @@ package Items;
 
 import Game.*;
 import Panels.BricksBreaker;
+import Panels.GamePanel;
 import Panels.PT;
 
 import javax.swing.*;
@@ -11,8 +12,10 @@ import java.awt.event.ActionListener;
 
 public class DanceLightItem extends SpecialItem{
 
-    static Timer timer;
-    static double time = 0;
+    static Timer timerColor;
+    static Timer timerVisibility;
+    static double timeColor = 0;
+    static double timeVisibility = 0;
     static MyColor ballColorT = new MyColor(255 ,255 ,255);
     static MyColor brickColorT = new MyColor(255 ,255 ,255);
     static MyColor backgroundColorT = new MyColor(0 ,0 ,0);
@@ -31,30 +34,14 @@ public class DanceLightItem extends SpecialItem{
     @Override
     void ability() {
         reset();
-        if (timer != null){
-            if (timer.isRunning())
-                timer.stop();
+        if (timerColor != null){
+            if (timerColor.isRunning())
+                timerColor.stop();
         }
-        timer = new Timer(20, new ActionListener() {
+        timerColor = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ((PT.time - time) / 1000d <= 10){
-                    if (((PT.time - time) / 1000d) % 0.05 < 0.01){
-                        itemVisibility = !itemVisibility;
-                        ballVisibility = !ballVisibility;
-                        brickVisibility = !brickVisibility;
-                        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
-                            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
-                                BricksBreaker.oigArrayList.get(i).setVisible(brickVisibility);
-                            }
-                            if (BricksBreaker.oigArrayList.get(i) instanceof Item){
-                                BricksBreaker.oigArrayList.get(i).setVisible(itemVisibility);
-                            }
-                            if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
-                                BricksBreaker.oigArrayList.get(i).setVisible(ballVisibility);
-                            }
-                        }
-                    }
+                if ((PT.time - timeColor) / 1000d <= 10){
 
                     ballColorT.add();
                     brickColorT.add();
@@ -69,14 +56,42 @@ public class DanceLightItem extends SpecialItem{
                     BricksBreaker.ballItemColor = new Color(ballItemColorT.getR() ,ballItemColorT.getG() ,ballItemColorT.getB());
                     BricksBreaker.speedItemColor = new Color(speedItemColorT.getR() ,speedItemColorT.getG() ,speedItemColorT.getB());
                     BricksBreaker.powerItemColor = new Color(powerItemColorT.getR() ,powerItemColorT.getG() ,powerItemColorT.getB());
-                }
-                else {
-                    reset();
-                    timer.stop();
+                    GamePanel.bricksBreaker.revalidate();
+                    GamePanel.bricksBreaker.repaint();
                 }
             }
         });
-        timer.start();
+
+        if (timerVisibility != null){
+            if (timerVisibility.isRunning())
+                timerVisibility.stop();
+        }
+        timerVisibility = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                itemVisibility = !itemVisibility;
+                ballVisibility = !ballVisibility;
+                brickVisibility = !brickVisibility;
+                for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                        BricksBreaker.oigArrayList.get(i).setVisible(brickVisibility);
+                    }
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Item){
+                        BricksBreaker.oigArrayList.get(i).setVisible(itemVisibility);
+                    }
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                        BricksBreaker.oigArrayList.get(i).setVisible(ballVisibility);
+                    }
+                }
+                if ((PT.time - timeVisibility) / 1000d > 10){
+                    reset();
+                    timerColor.stop();
+                    timerVisibility.stop();
+                }
+            }
+        });
+        timerColor.start();
+        timerVisibility.start();
     }
 
     @Override
@@ -87,7 +102,8 @@ public class DanceLightItem extends SpecialItem{
     }
 
     void reset(){
-        time = PT.time;
+        timeColor = PT.time;
+        timeVisibility = PT.time;
         ballColorT = new MyColor(255 ,255 ,255);
         brickColorT = new MyColor(255 ,255 ,255);
         backgroundColorT = new MyColor(0 ,0 ,0);

@@ -136,7 +136,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                 cy --;
                 for (int i = 0 ;i < oigArrayList.size() ;i++){
                     if (oigArrayList.get(i) instanceof Brick){
-                        if ( ((Brick)oigArrayList.get(i)).collision(cx ,cy)){
+                        if ( ((Brick)oigArrayList.get(i)).collision(cx ,cy ,1)){
                             flag = true;
                         }
                     }

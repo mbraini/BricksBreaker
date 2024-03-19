@@ -92,7 +92,7 @@ public class Ball extends OIG implements Moveable {
 
     boolean hasCollision(ArrayList<Brick> bricks){
         for (int i = 0 ;i < bricks.size() ;i++){
-            if (bricks.get(i).collision(this.x ,this.y)){
+            if (bricks.get(i).collision(this.x ,this.y ,BricksBreaker.ballRadios)){
                 return true;
             }
         }

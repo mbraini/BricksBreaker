@@ -58,7 +58,7 @@ public class GameLoop extends Thread{
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++) {
                         if (BricksBreaker.oigArrayList.get(j) instanceof Brick) {
                             Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
-                            if (brick.collision(ball.getX() ,ball.getY())) {
+                            if (brick.collision(ball.getX() ,ball.getY() ,BricksBreaker.ballRadios)) {
                                 bricks.add(brick);
                             }
                         }

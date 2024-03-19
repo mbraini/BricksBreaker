@@ -46,20 +46,21 @@ public class Ball extends OIG implements Moveable {
         double xVelocityI = xVelocity;
         double yVelocityI = yVelocity;
 
+
         yVelocity = -yVelocity;
         move();
-        if (hasCollision(bricks)){
+        if (hasCollision(bricks) || borderCollision()){
             reset(xI ,yI ,xVelocityI ,yVelocityI);
 
             xVelocity = -xVelocity;
             move();
-            if (hasCollision(bricks)){
+            if (hasCollision(bricks) || borderCollision()){
                 reset(xI ,yI ,xVelocityI ,yVelocityI);
 
                 xVelocity = -xVelocity;
                 yVelocity = -yVelocity;
                 move();
-                if (hasCollision(bricks)){
+                if (hasCollision(bricks) || borderCollision()){
                     BricksBreaker.oigArrayList.remove(this);
                     System.out.println("JZZZZZZZZZZZZ");
                 }
@@ -103,5 +104,12 @@ public class Ball extends OIG implements Moveable {
         this.y = y;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
+    }
+
+    boolean borderCollision(){
+        if (x <= BricksBreaker.ballRadios || x >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios || y <= BricksBreaker.ballRadios) {
+            return true;
+        }
+        return false;
     }
 }

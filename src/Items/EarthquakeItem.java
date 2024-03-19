@@ -28,18 +28,31 @@ public class EarthquakeItem extends SpecialItem{
                 brickChanger.stop();
             }
         }
-        brickChanger = new Timer(31, new ActionListener() {
+        brickChanger = new Timer(125, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                        Brick brick = (Brick) BricksBreaker.oigArrayList.get(i);
+                        for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
+                            if (BricksBreaker.oigArrayList.get(j) instanceof Ball){
+                                Ball ball = (Ball) BricksBreaker.oigArrayList.get(j);
+                                if (brick.collision(ball)){
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
                 if (!flag){
-                    BricksBreaker.brickWidth--;
-                    BricksBreaker.brickHeight--;
+                    BricksBreaker.brickWidth -= 3;
+                    BricksBreaker.brickHeight -= 2;
                 }
                 else {
-                    BricksBreaker.brickWidth++;
-                    BricksBreaker.brickHeight++;
+                    BricksBreaker.brickWidth += 3;
+                    BricksBreaker.brickHeight += 2;
                 }
-                if (BricksBreaker.brickWidth < 60 || BricksBreaker.brickWidth > 100){
+                if (BricksBreaker.brickWidth < 40 || BricksBreaker.brickWidth > 100){
                     flag = !flag;
                 }
                 if ((PT.time - time) / 1000 >= 10){

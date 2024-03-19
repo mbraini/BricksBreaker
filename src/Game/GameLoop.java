@@ -52,7 +52,6 @@ public class GameLoop extends Thread{
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
-                    ball.move();
                     checkBorderCollision(ball);
                     ArrayList<Brick> bricks = new ArrayList<>();
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++) {
@@ -66,6 +65,7 @@ public class GameLoop extends Thread{
                     if (!bricks.isEmpty()){
                         ball.collisionFix(bricks);
                     }
+                    ball.move();
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++){
                         if (BricksBreaker.oigArrayList.get(j) instanceof OrdinaryItem){
                             OrdinaryItem item = (OrdinaryItem) BricksBreaker.oigArrayList.get(j);

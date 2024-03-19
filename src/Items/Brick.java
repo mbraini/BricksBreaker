@@ -32,10 +32,10 @@ public class Brick extends OIG implements Gravity {
     @Override
     public void draw(Graphics g) {
         g.setColor(BricksBreaker.brickColor);
-        g.fillRect((int) x ,(int) y ,BricksBreaker.brickWidth - 3 ,BricksBreaker.brickHeight - 3);
+        g.fillRect((int) (x - BricksBreaker.brickWidth / 2) ,(int) (y - BricksBreaker.brickHeight / 2) ,BricksBreaker.brickWidth - 3 ,BricksBreaker.brickHeight - 3);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Default",Font.BOLD ,20));
-        g.drawString("" + this.getHP() , (int) (x + BricksBreaker.brickWidth / 2) ,(int) (y + BricksBreaker.brickHeight / 2));
+        g.drawString("" + this.getHP() , (int) (x) ,(int) (y));
     }
 
     public int getWidth() {
@@ -68,9 +68,7 @@ public class Brick extends OIG implements Gravity {
     }
 
     public boolean collision(Ball ball) {
-        double xc = x + BricksBreaker.brickWidth / 2d;
-        double yc = y + BricksBreaker.brickHeight / 2d;
-        if (Math.abs(ball.getX() - xc) <= BricksBreaker.brickWidth / 2d + BricksBreaker.ballRadios && Math.abs(ball.getY() - yc) <= BricksBreaker.brickHeight / 2d + BricksBreaker.ballRadios) {
+        if (Math.abs(ball.getX() - x) <= BricksBreaker.brickWidth / 2d + BricksBreaker.ballRadios && Math.abs(ball.getY() - y) <= BricksBreaker.brickHeight / 2d + BricksBreaker.ballRadios) {
             return true;
         }
         return false;

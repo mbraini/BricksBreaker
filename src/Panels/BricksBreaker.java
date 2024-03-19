@@ -20,6 +20,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color brickColor = Color.WHITE;
     public static Color backgroundColor = Color.BLACK;
     public static Color itemColor;
+    public static final int brickInitialX = 50;
+    public static final int brickInitialY = 40;
     public static int ballVelocity = 6;
     public static int ballPower = 1;
     public static int ballCount = 1;
@@ -89,14 +91,14 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         }
         ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(BrickCount);
         for (int i =0 ;i < randoms.size() - 1 ;i++){
-            oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP ,null));
+            oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
         Random random = new Random();
         int itemPossibility = random.nextInt(300);
         Item item;
         if (itemPossibility < 280){
             item = new EarthquakeItem();
-            oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 ,0 ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
+            oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
             ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
             oigArrayList.add(item);
         }
@@ -208,7 +210,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         for (int i = 0; i < oigArrayList.size() ;i++){
             if (oigArrayList.get(i) instanceof Brick) {
                 Brick brick = (Brick) oigArrayList.get(i);
-                brick.setY(brick.getY() + brick.getHeight());
+                brick.setY(brick.getY() + brickInitialY * 2);
             }
         }
     }

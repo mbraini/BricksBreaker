@@ -21,10 +21,4 @@ public class GameHelper {
         }
         return randoms;
     }
-
-    public static void aimingCollision(double x2,double y2){
-
-    }
-
-
 }

@@ -67,8 +67,8 @@ public class Brick extends OIG implements Gravity {
         y += BricksBreaker.gravity;
     }
 
-    public boolean collision(Ball ball) {
-        if (Math.abs(ball.getX() - x) <= BricksBreaker.brickWidth / 2d + BricksBreaker.ballRadios && Math.abs(ball.getY() - y) <= BricksBreaker.brickHeight / 2d + BricksBreaker.ballRadios) {
+    public boolean collision(double x ,double y) {
+        if (Math.abs(x - this.x) <= BricksBreaker.brickWidth / 2d + BricksBreaker.ballRadios && Math.abs(y - this.y) <= BricksBreaker.brickHeight / 2d + BricksBreaker.ballRadios) {
             return true;
         }
         return false;

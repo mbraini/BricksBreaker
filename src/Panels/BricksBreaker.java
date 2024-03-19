@@ -127,27 +127,22 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                 return;
             }
             double m = ((aimingFirstPoint.y - y) / (double) (aimingFirstPoint.x - x));
-            int xm, ym;
-            xm = 0;
-            ym = (int) (aimingFirstPoint.y - m * aimingFirstPoint.x);
-            if (ym >= 0 && ym <= GAME_HEIGHT) {
-                aimingSecondPoint = new Point(xm, ym);
-                GameHelper.aimingCollision(xm, ym);
+            double cx = aimingFirstPoint.getX(), cy = aimingFirstPoint.getY();
+            boolean flag = false;
+            for (double j = 0 ;j < BricksBreaker.GAME_HEIGHT ;j++){
+                if (flag)
+                    break;
+                cx -= 1 / m;
+                cy --;
+                for (int i = 0 ;i < oigArrayList.size() ;i++){
+                    if (oigArrayList.get(i) instanceof Brick){
+                        if ( ((Brick)oigArrayList.get(i)).collision(cx ,cy)){
+                            flag = true;
+                        }
+                    }
+                }
             }
-
-            ym = 0;
-            xm = (int) ((m * aimingFirstPoint.x - aimingFirstPoint.y) / m);
-            if (xm >= 0 && xm <= GAME_WIDTH) {
-                aimingSecondPoint = new Point(xm, ym);
-                GameHelper.aimingCollision(xm, ym);
-            }
-
-            xm = GAME_WIDTH;
-            ym = (int) (m * (xm - aimingFirstPoint.x) + aimingFirstPoint.y);
-            if (ym >= 0 && ym <= GAME_HEIGHT) {
-                aimingSecondPoint = new Point(xm, ym);
-                GameHelper.aimingCollision(xm, ym);
-            }
+            aimingSecondPoint.setLocation(cx ,cy);
         }
     }
 

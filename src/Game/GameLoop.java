@@ -7,6 +7,7 @@ import Items.OrdinaryItem;
 import Panels.BricksBreaker;
 import Panels.GamePanel;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GameLoop extends Thread{
@@ -57,7 +58,7 @@ public class GameLoop extends Thread{
                     for (int j = 0 ;j < BricksBreaker.oigArrayList.size() ;j++) {
                         if (BricksBreaker.oigArrayList.get(j) instanceof Brick) {
                             Brick brick = (Brick) BricksBreaker.oigArrayList.get(j);
-                            if (brick.collision(ball)) {
+                            if (brick.collision(ball.getX() ,ball.getY())) {
                                 bricks.add(brick);
                             }
                         }

@@ -61,6 +61,7 @@ public class Ball extends OIG implements Moveable {
                 move();
                 if (hasCollision(bricks)){
                     BricksBreaker.oigArrayList.remove(this);
+                    System.out.println("JZZZZZZZZZZZZ");
                 }
                 else {
                     for (int i = 0; i < bricks.size() ;i++){

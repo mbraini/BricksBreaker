@@ -31,7 +31,6 @@ public class GameLoop extends Thread{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            GamePanel.pt.addTime(BricksBreaker.REFRESH_RATE);
         }
     }
 

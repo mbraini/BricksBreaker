@@ -4,10 +4,13 @@ import Game.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PT extends JPanel {
     JLabel timeL;
     JLabel pointL;
+    Timer timer;
     static public double time;
     double point;
 
@@ -43,6 +46,12 @@ public class PT extends JPanel {
     }
 
     public void start() {
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addTime(1000);
+            }
+        });
         time = 0;
         point = 0;
 
@@ -57,6 +66,6 @@ public class PT extends JPanel {
         this.add(timeL);
         this.add(pointL);
 
-
+        timer.start();
     }
 }

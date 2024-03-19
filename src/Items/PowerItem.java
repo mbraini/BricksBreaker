@@ -8,19 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PowerItem extends OrdinaryItem{
-    Timer ability;
+    static Timer ability;
 
     public PowerItem(int x ,int y) {
         this.x = x;
         this.y = y;
         isVisible = true;
-        this.ability = new Timer(15000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                BricksBreaker.ballPower = 1;
-                ability.stop();
-            }
-        });
     }
 
     @Override
@@ -30,6 +23,18 @@ public class PowerItem extends OrdinaryItem{
 
     @Override
     void ability() {
+        if (ability != null){
+            if (ability.isRunning()){
+                ability.stop();
+            }
+        }
+        ability = new Timer(15000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BricksBreaker.ballPower = 1;
+                ability.stop();
+            }
+        });
         BricksBreaker.ballPower = 2;
         ability.start();
     }

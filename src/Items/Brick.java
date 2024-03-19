@@ -84,7 +84,7 @@ public class Brick extends OIG implements Gravity {
     }
 
     public void decreesHP(){
-        HP--;
+        HP = HP - BricksBreaker.ballPower;
     }
 
     public SpecialItem getSpecialItem() {

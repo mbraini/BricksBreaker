@@ -106,8 +106,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             oigArrayList.add(new PowerItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
         else if (itemPossibility < 140) {
-            item = new PowerItem(0, 0);
-            oigArrayList.add(new PowerItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+            item = new SpeedItem(0, 0);
+            oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
         else if (itemPossibility < 145){
             item = new EarthquakeItem();

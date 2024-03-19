@@ -14,14 +14,6 @@ public class SpeedItem extends OrdinaryItem{
         this.x = x;
         this.y = y;
         isVisible = true;
-
-//        this.ability = new Timer(15000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                BricksBreaker.ballVelocity = 8;
-//                ability.stop();
-//            }
-//        });
     }
 
     @Override
@@ -31,14 +23,33 @@ public class SpeedItem extends OrdinaryItem{
 
     @Override
     void ability() {
-//        BricksBreaker.ballVelocity = 16;
-//        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
-//            if (BricksBreaker.oigArrayList.get(i) instanceof Ball) {
-//                BricksBreaker.oigArrayList.get(i).setxVelocity(BricksBreaker.oigArrayList.get(i).getxVelocity() * Math.pow(2, 0.5));
-//                BricksBreaker.oigArrayList.get(i).setyVelocity(BricksBreaker.oigArrayList.get(i).getyVelocity() * Math.pow(2, 0.5));
-//            }
-//        }
-//        ability.start();
+        if (ability != null){
+            if (ability.isRunning())
+                ability.stop();
+        }
+        ability = new Timer(15000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                        Ball ball =(Ball) (BricksBreaker.oigArrayList.get(i));
+                        ball.setxVelocity(ball.getxVelocity() / 2);
+                        ball.setyVelocity(ball.getyVelocity() / 2);
+                    }
+                }
+                BricksBreaker.ballVelocity /= 2;
+                ability.stop();
+            }
+        });
+        BricksBreaker.ballVelocity *= 2;
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                Ball ball =(Ball) (BricksBreaker.oigArrayList.get(i));
+                ball.setxVelocity(ball.getxVelocity() * 2);
+                ball.setyVelocity(ball.getyVelocity() * 2);
+            }
+        }
+        ability.start();
     }
 
     @Override

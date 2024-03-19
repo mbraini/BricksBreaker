@@ -143,7 +143,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                     }
                 }
             }
-            if (cy > 670)
+            if (cy > GAME_HEIGHT - brickInitialY * 2)
                 return;
             aimingSecondPoint.setLocation(cx ,cy);
         }
@@ -174,7 +174,6 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                         BricksBreaker.currentBallAimed++;
                     }
                     else {
-                        currentBallAimed = 0;
                         BricksBreaker.ballAimingTimer.stop();
                     }
                 }
@@ -205,9 +204,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     public void pushBricks() {
         for (int i = 0; i < oigArrayList.size() ;i++){
-            if (oigArrayList.get(i) instanceof Brick) {
-                Brick brick = (Brick) oigArrayList.get(i);
-                brick.setY(brick.getY() + brickInitialY * 2);
+            if (oigArrayList.get(i) instanceof Brick || oigArrayList.get(i) instanceof Item) {
+                oigArrayList.get(i).setY(oigArrayList.get(i).getY() + brickInitialY * 2);
             }
         }
     }

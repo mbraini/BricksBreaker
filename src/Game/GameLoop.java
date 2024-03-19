@@ -81,18 +81,25 @@ public class GameLoop extends Thread{
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
                     if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
                         if (!BricksBreaker.newAim){
-                            BricksBreaker.aimingFirstPoint.setLocation(ball.getX() ,ball.getY());
+                            double ballX = ball.getX(), ballY = ball.getY();
+                            if (ball.getX() <= BricksBreaker.ballRadios + 20){
+                                ballX = BricksBreaker.ballRadios + 20;
+                            }
+                            if (ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20){
+                                ballX = BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20;
+                            }
+                            BricksBreaker.aimingFirstPoint.setLocation(ballX ,ballY);
                             BricksBreaker.newAim = true;
                         }
                         BricksBreaker.oigArrayList.remove(ball);
-                        if (BallsRemoved()){
-                            nextTurn();
-                        }
                         break;
                     }
                 }
             }
             checkBricksHP();
+            if (BallsRemoved() && BricksBreaker.currentBallAimed != 0){
+                nextTurn();
+            }
         }
     }
 
@@ -143,6 +150,7 @@ public class GameLoop extends Thread{
         BricksBreaker.inTurn = false;
         bricksBreaker.pushBricks();
         bricksBreaker.addBricksAndItems();
+        BricksBreaker.currentBallAimed = 0;
     }
 
     static public void CheckBallOut(Ball ball){

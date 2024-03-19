@@ -135,7 +135,7 @@ public class GameLoop extends Thread{
     void nextTurn(){
         if (!BricksBreaker.newAim){
             Random random = new Random();
-            BricksBreaker.aimingFirstPoint.setLocation(random.nextInt(BricksBreaker.GAME_WIDTH) ,BricksBreaker.GAME_HEIGHT);
+            BricksBreaker.aimingFirstPoint.setLocation(random.nextInt(BricksBreaker.GAME_WIDTH - 4*BricksBreaker.ballRadios) + 2*BricksBreaker.ballRadios ,BricksBreaker.GAME_HEIGHT);
         }
         BricksBreaker.newAim = false;
         BricksBreaker.ballCount ++;

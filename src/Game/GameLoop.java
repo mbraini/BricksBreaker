@@ -9,6 +9,7 @@ import Panels.GamePanel;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameLoop extends Thread{
 
@@ -79,6 +80,10 @@ public class GameLoop extends Thread{
                 if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
                     if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
+                        if (!BricksBreaker.newAim){
+                            BricksBreaker.aimingFirstPoint.setLocation(ball.getX() ,ball.getY());
+                            BricksBreaker.newAim = true;
+                        }
                         BricksBreaker.oigArrayList.remove(ball);
                         if (BallsRemoved()){
                             nextTurn();
@@ -128,6 +133,11 @@ public class GameLoop extends Thread{
 
 
     void nextTurn(){
+        if (!BricksBreaker.newAim){
+            Random random = new Random();
+            BricksBreaker.aimingFirstPoint.setLocation(random.nextInt(BricksBreaker.GAME_WIDTH) ,BricksBreaker.GAME_HEIGHT);
+        }
+        BricksBreaker.newAim = false;
         BricksBreaker.ballCount ++;
         BricksBreaker.currentBricksHP++;
         BricksBreaker.inTurn = false;

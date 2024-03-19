@@ -34,6 +34,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int currentBricksHP = 1;
     public static boolean isRunning;
     public static boolean inTurn = false;
+    public static boolean newAim = false;
     public static Point aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static Point aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static ArrayList<OIG> oigArrayList;

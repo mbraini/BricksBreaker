@@ -8,7 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SpeedItem extends OrdinaryItem{
-    Timer ability;
+    static Timer ability ;
+    static SpeedAL speedAL = new SpeedAL(null);
 
     public SpeedItem(int x ,int y) {
         this.x = x;
@@ -24,29 +25,27 @@ public class SpeedItem extends OrdinaryItem{
     @Override
     void ability() {
         if (ability != null){
-            if (ability.isRunning())
-                ability.stop();
+            ability.removeActionListener(speedAL);
         }
-        ability = new Timer(15000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
-                    if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
-                        Ball ball =(Ball) (BricksBreaker.oigArrayList.get(i));
-                        ball.setxVelocity(ball.getxVelocity() / 2);
-                        ball.setyVelocity(ball.getyVelocity() / 2);
-                    }
-                }
-                BricksBreaker.ballVelocity /= 2;
-                ability.stop();
-            }
-        });
-        BricksBreaker.ballVelocity *= 2;
+        double V;
+        BricksBreaker.ballVelocity = 6;
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
-                Ball ball =(Ball) (BricksBreaker.oigArrayList.get(i));
-                ball.setxVelocity(ball.getxVelocity() * 2);
-                ball.setyVelocity(ball.getyVelocity() * 2);
+                Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
+                V = Math.sqrt( Math.pow(ball.getxVelocity() ,2) + Math.pow(ball.getyVelocity() ,2) );
+                ball.setxVelocity(ball.getxVelocity() * (6d /V));
+                ball.setyVelocity(ball.getyVelocity() * (6d /V));
+            }
+        }
+        ability = new Timer(15000, speedAL);
+        speedAL.ability = ability;
+        BricksBreaker.ballVelocity = 12;
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
+                Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
+                V = Math.sqrt( Math.pow(ball.getxVelocity() ,2) + Math.pow(ball.getyVelocity() ,2) );
+                ball.setxVelocity(ball.getxVelocity() * (12d /V));
+                ball.setyVelocity(ball.getyVelocity() * (12d /V));
             }
         }
         ability.start();

@@ -22,7 +22,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color itemColor;
     public static final int brickInitialX = 50;
     public static final int brickInitialY = 40;
-    public static int ballVelocity = 6;
+    public static int ballVelocity = 7;
     public static int ballPower = 1;
     public static int ballCount = 1;
     public static int currentBallAimed = 0;

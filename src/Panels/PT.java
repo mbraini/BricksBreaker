@@ -68,4 +68,10 @@ public class PT extends JPanel {
 
         timer.start();
     }
+
+
+    public void stop(){
+        time = 0;
+        point = 0;
+    }
 }

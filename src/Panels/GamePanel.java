@@ -16,15 +16,28 @@ public class GamePanel extends JPanel {
         this.setVisible(false);
         this.setOpaque(false);
         this.setBounds(0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+
+        bricksBreaker = new BricksBreaker();
+        pt = new PT();
+        this.add(bricksBreaker);
+        this.add(pt);
     }
 
 
     public void start() {
+        this.remove(bricksBreaker);
+        this.remove(pt);
         bricksBreaker = new BricksBreaker();
         pt = new PT();
-        this.setVisible(true);
         this.add(bricksBreaker);
         this.add(pt);
+        this.setVisible(true);
         bricksBreaker.start();
+    }
+
+    static public void stop(){
+        bricksBreaker.stop();
+        pt.stop();
+        Game.gamePanel.setVisible(false);
     }
 }

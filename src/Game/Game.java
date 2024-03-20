@@ -23,6 +23,7 @@ public class Game {
     static public SettingsPanel settingsPanel;
     static public GamePrepPanel gamePrepPanel;
     static public JPanel panel;
+    static public EndGamePanel endGamePanel;
     public Game() {
 
         gameFrame = new GameFrame();
@@ -34,6 +35,7 @@ public class Game {
         historyPanel = new HistoryPanel();
         settingsPanel = new SettingsPanel();
         gamePrepPanel = new GamePrepPanel();
+        endGamePanel = new EndGamePanel();
         gameFrame.setContentPane(panel);
 
         panel.add(mainPanel);
@@ -41,6 +43,7 @@ public class Game {
         panel.add(settingsPanel);
         panel.add(gamePrepPanel);
         panel.add(gamePanel);
+        panel.add(endGamePanel);
 
 
         gameFrame.setVisible(true);

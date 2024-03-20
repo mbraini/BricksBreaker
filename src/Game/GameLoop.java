@@ -5,6 +5,7 @@ import Items.Brick;
 import Items.Item;
 import Items.OrdinaryItem;
 import Panels.BricksBreaker;
+import Panels.EndGamePanel;
 import Panels.GamePanel;
 
 import java.awt.event.MouseEvent;
@@ -24,13 +25,13 @@ public class GameLoop extends Thread{
     @Override
     public void run() {
         super.run();
-        while (bricksBreaker.isRunning){
-            update();
+        while (BricksBreaker.isRunning){
             try {
                 Thread.sleep(BricksBreaker.REFRESH_RATE);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            update();
         }
     }
 
@@ -38,6 +39,10 @@ public class GameLoop extends Thread{
         bricksBreaker.revalidate();
         bricksBreaker.repaint();
         bricksBreaker.setBackground(BricksBreaker.backgroundColor);
+        checkEndGame();
+        if (!BricksBreaker.isRunning){
+            return;
+        }
         if (!BricksBreaker.inTurn) {
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
@@ -98,6 +103,19 @@ public class GameLoop extends Thread{
             checkBricksHP();
             if (BallsRemoved() && BricksBreaker.currentBallAimed != 0){
                 nextTurn();
+            }
+        }
+    }
+
+    private void checkEndGame() {
+        for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
+            if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                Brick brick = (Brick) BricksBreaker.oigArrayList.get(i);
+                if (brick.getY() >= BricksBreaker.GAME_HEIGHT - BricksBreaker.brickHeight / 2d){
+                    GamePanel.stop();
+                    Game.endGamePanel.setVisible(true);
+                    return;
+                }
             }
         }
     }

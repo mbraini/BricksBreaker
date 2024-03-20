@@ -19,7 +19,6 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color ballColor = Color.WHITE;
     public static Color brickColor = Color.WHITE;
     public static Color backgroundColor = Color.BLACK;
-    public static Color itemColor;
     public static final int brickInitialX = 50;
     public static final int brickInitialY = 40;
     public static int ballVelocity = 7;
@@ -222,5 +221,32 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                 oigArrayList.get(i).setY(oigArrayList.get(i).getY() + brickInitialY * 2);
             }
         }
+    }
+
+    public void stop(){
+        gameLoop.interrupt();
+        gameLoop = null;
+        brickColor = Color.WHITE;
+        backgroundColor = Color.BLACK;
+        ballVelocity = 7;
+        ballPower = 1;
+        ballCount = 1;
+        currentBallAimed = 0;
+        ballRadios = 10;
+        itemRadios = 10;
+        gravity = 1;
+        brickWidth = GAME_WIDTH / 6;
+        brickHeight = GAME_HEIGHT / 9;
+        currentBricksHP = 1;
+        isRunning = false;
+        inTurn = false;
+        newAim = false;
+        aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
+        aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
+        oigArrayList = null;
+        ballAimingTimer = null;
+        ballItemColor = Color.GREEN;
+        speedItemColor = Color.RED;
+        powerItemColor = Color.BLUE;
     }
 }

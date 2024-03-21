@@ -36,7 +36,7 @@ public class MainPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.mainPanel.setVisible(false);
-                Game.historyPanel.setVisible(true);
+                Game.historyPanel.start();
             }
         });
 

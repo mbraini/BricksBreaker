@@ -4,6 +4,8 @@ import javax.swing.*;
 import Game.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 public class HistoryPanel extends JPanel {
     JScrollPane jScrollPane;
     Container container;
+    JButton menu;
 
     public HistoryPanel(){
         this.setOpaque(false);
@@ -22,8 +25,30 @@ public class HistoryPanel extends JPanel {
         container.setLayout(new GridLayout(1000 ,4 ,10 ,50));
 
         jScrollPane = new JScrollPane(container ,JScrollPane.VERTICAL_SCROLLBAR_NEVER ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
+        initMenu();
         this.add(jScrollPane);
+    }
+
+    private void initMenu() {
+        menu = new JButton();
+        menu.setBounds(Game.GAME_WIDTH / 3,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/3,Game.GAME_HEIGHT/6);
+        menu.setText("Menu");
+        menu.setBackground(Color.WHITE);
+        menu.setOpaque(true);
+        menu.setHorizontalTextPosition(JButton.CENTER);
+        menu.setVerticalTextPosition(JButton.CENTER);
+        menu.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
+        menu.setFocusable(false);
+
+        menu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.historyPanel.setVisible(false);
+                Game.mainPanel.setVisible(true);
+            }
+        });
+
+        this.add(menu);
     }
 
     public void start(){
@@ -54,7 +79,7 @@ public class HistoryPanel extends JPanel {
             System.out.println("File Not Found");
         }
         jScrollPane = new JScrollPane(container ,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane.setBounds(0 ,0 ,Game.GAME_WIDTH ,Game.GAME_HEIGHT);
+        jScrollPane.setBounds(0 ,0 ,Game.GAME_WIDTH ,Game.GAME_HEIGHT * 5 / 6);
 
         this.add(jScrollPane);
     }

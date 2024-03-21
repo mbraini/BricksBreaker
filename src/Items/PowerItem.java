@@ -1,6 +1,7 @@
 package Items;
 
 import Panels.BricksBreaker;
+import Panels.PT;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 
 public class PowerItem extends OrdinaryItem{
     public static Timer ability;
+    public static double time;
 
     public PowerItem(int x ,int y) {
         this.x = x;
@@ -28,11 +30,14 @@ public class PowerItem extends OrdinaryItem{
                 ability.stop();
             }
         }
-        ability = new Timer(15000, new ActionListener() {
+        time = PT.time;
+        ability = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BricksBreaker.ballPower = 1;
-                ability.stop();
+                if (BricksBreaker.isRunning && PT.time - time > 15000) {
+                    BricksBreaker.ballPower = 1;
+                    ability.stop();
+                }
             }
         });
         BricksBreaker.ballPower = 2;

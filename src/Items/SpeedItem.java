@@ -1,6 +1,7 @@
 package Items;
 
 import Panels.BricksBreaker;
+import Panels.PT;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 public class SpeedItem extends OrdinaryItem{
     static public Timer ability ;
     static public SpeedAL speedAL = new SpeedAL(null);
+    static public double time;
 
     public SpeedItem(int x ,int y) {
         this.x = x;
@@ -27,6 +29,7 @@ public class SpeedItem extends OrdinaryItem{
         if (ability != null){
             ability.removeActionListener(speedAL);
         }
+        time = PT.time;
         double V;
         BricksBreaker.ballVelocity = 6;
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
@@ -37,7 +40,7 @@ public class SpeedItem extends OrdinaryItem{
                 ball.setyVelocity(ball.getyVelocity() * (6d /V));
             }
         }
-        ability = new Timer(15000, speedAL);
+        ability = new Timer(100, speedAL);
         speedAL.ability = ability;
         BricksBreaker.ballVelocity = 12;
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){

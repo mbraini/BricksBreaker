@@ -110,6 +110,7 @@ public class GamePrepPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (userNameT.getText().length() != 0){
+                    Game.playerName = userNameT.getText();
                     Game.gamePrepPanel.setVisible(false);
                     Game.gamePanel.start();
                 }

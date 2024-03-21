@@ -43,12 +43,9 @@ public class HistoryPanel extends JPanel {
                 String point = string.substring(0 ,string.indexOf(" "));
                 string = string.substring(string.indexOf(" ") + 1);
 
-                String time = string.substring(0 ,string.indexOf(" "));
-                string = string.substring(string.indexOf(" ") + 1);
-
                 String date = string;
 
-                JLabel label = new JLabel("name : " + name + "  point : " + point + "  time : " + time + "  date : " + date);
+                JLabel label = new JLabel("name : " + name + "  point : " + point + "  date and time : " + date);
                 label.setFont(new Font(null ,Font.BOLD ,20));
                 container.add(label);
             }

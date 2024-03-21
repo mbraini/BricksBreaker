@@ -14,6 +14,7 @@ public class Game {
     static public boolean Aiming = true;
     static public boolean SongTheme = true;
     static public boolean Saving = true;
+    static public String playerName;
     public static final int GAME_HEIGHT = 800;
     public static final int GAME_WIDTH = 600;
     public GameFrame gameFrame;

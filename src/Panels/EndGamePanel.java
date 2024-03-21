@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
 
 public class EndGamePanel extends JPanel {
 
@@ -106,6 +113,30 @@ public class EndGamePanel extends JPanel {
 
     public void start(double point){
         this.setVisible(true);
+        if (Game.Saving){
+            save(point);
+        }
         EndGamePanel.point.setText("Your Score : " + point);
+    }
+
+    private void save(double point) {
+        ArrayList<String> strings = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream("src/Game/History.txt");
+            Scanner sc = new Scanner(fis);
+            while (sc.hasNextLine()){
+                strings.add(sc.nextLine());
+            }
+            Calendar calendar = Calendar.getInstance();
+            Date currentDate = calendar.getTime();
+            strings.add(Game.playerName + " " + point + " " + currentDate.toString());
+            PrintStream ps = new PrintStream("src/Game/History.txt");
+            for (int i = 0 ;i < strings.size() ;i++){
+                ps.println(strings.get(i));
+            }
+        }
+        catch (Exception e){
+
+        }
     }
 }

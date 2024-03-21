@@ -28,7 +28,7 @@ public class MainPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Game.mainPanel.setVisible(false);
                 Game.gamePanel.setVisible(false);
-                Game.gamePrepPanel.setVisible(true);
+                Game.gamePrepPanel.start();
             }
         });
 

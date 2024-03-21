@@ -189,4 +189,23 @@ public class GamePrepPanel extends JPanel {
 
     }
 
+    public void start() {
+        this.setVisible(true);
+        this.remove(difficultyBE);
+        this.remove(difficultyBM);
+        this.remove(difficultyBH);
+        this.remove(ballColorB);
+        this.remove(userNameB);
+        this.remove(userNameT);
+        this.remove(startGame);
+        this.remove(difficultyL);
+        this.remove(ballColorL);
+        this.remove(userNameL);
+
+        initDifficulty();
+        initBallColor();
+        initUserName();
+        initStartGame();
+        setActionListeners();
+    }
 }

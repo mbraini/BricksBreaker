@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 
 public class DanceLightItem extends SpecialItem{
 
-    static Timer timerColor;
-    static Timer timerVisibility;
+    public static Timer timerColor;
+    public static Timer timerVisibility;
     static double timeColor = 0;
     static double timeVisibility = 0;
     static MyColor ballColorT = new MyColor(255 ,255 ,255);

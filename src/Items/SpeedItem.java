@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SpeedItem extends OrdinaryItem{
-    static Timer ability ;
-    static SpeedAL speedAL = new SpeedAL(null);
+    static public Timer ability ;
+    static public SpeedAL speedAL = new SpeedAL(null);
 
     public SpeedItem(int x ,int y) {
         this.x = x;

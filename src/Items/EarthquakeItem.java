@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class EarthquakeItem extends SpecialItem{
 
-    static Timer brickChanger;
+    public static Timer brickChanger;
     static boolean flag = false;
     static double time;
 

@@ -71,7 +71,9 @@ public class PT extends JPanel {
 
 
     public void stop(){
+        timer.stop();
         time = 0;
         point = 0;
+        timer = null;
     }
 }

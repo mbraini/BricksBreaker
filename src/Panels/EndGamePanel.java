@@ -25,21 +25,24 @@ public class EndGamePanel extends JPanel {
         menu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Game.endGamePanel.setVisible(false);
+                Game.mainPanel.setVisible(true);
             }
         });
 
         playAgain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Game.endGamePanel.setVisible(false);
+                Game.gamePanel.start();
             }
         });
 
         prepGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Game.endGamePanel.setVisible(false);
+                Game.gamePrepPanel.start();
             }
         });
 

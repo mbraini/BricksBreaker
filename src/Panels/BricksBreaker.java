@@ -243,7 +243,28 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         newAim = false;
         aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
         aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
+
+        if (SpeedItem.ability != null) {
+            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
+            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
+        }
+
+        if (DanceLightItem.timerColor != null) {
+            DanceLightItem.timerVisibility.stop();
+            DanceLightItem.timerColor.stop();
+        }
+
+        if (EarthquakeItem.brickChanger != null) {
+            EarthquakeItem.brickChanger.stop();
+        }
+
+        if (PowerItem.ability != null){
+            PowerItem.ability.stop();
+        }
+
         oigArrayList = null;
+        if (ballAimingTimer != null)
+            ballAimingTimer.stop();
         ballAimingTimer = null;
         ballItemColor = Color.GREEN;
         speedItemColor = Color.RED;

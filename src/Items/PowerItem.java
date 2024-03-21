@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PowerItem extends OrdinaryItem{
-    static Timer ability;
+    public static Timer ability;
 
     public PowerItem(int x ,int y) {
         this.x = x;

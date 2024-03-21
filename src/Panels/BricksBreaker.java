@@ -58,7 +58,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                 oigArrayList.get(i).draw(g);
             }
         }
-        if (!inTurn){
+        if (!inTurn && Game.Aiming){
             paintAiming(g);
         }
     }
@@ -75,6 +75,33 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         this.addMouseListener(this);
 
         addBricksAndItems();
+        this.grabFocus();
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == 'P' || e.getKeyChar() == 'p'){
+                    isRunning = false;
+                    gameLoop = null;
+                }
+                else if (e.getKeyChar() == 'R' || e.getKeyChar() == 'r'){
+                    if (!isRunning) {
+                        isRunning = true;
+                        gameLoop = new GameLoop(GamePanel.bricksBreaker);
+                        gameLoop.start();
+                    }
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
         gameLoop.start();
     }
 
@@ -164,7 +191,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!inTurn && aimingSecondPoint.x != aimingFirstPoint.x && aimingSecondPoint.y != aimingFirstPoint.y){
+        if (!inTurn && aimingSecondPoint.x != aimingFirstPoint.x && aimingSecondPoint.y != aimingFirstPoint.y && isRunning){
             inTurn = true;
             int ballCountClone = ballCount;
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {

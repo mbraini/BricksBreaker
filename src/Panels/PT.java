@@ -21,7 +21,7 @@ public class PT extends JPanel {
     }
 
     public void setTime(double time) {
-        this.time = time;
+        PT.time = time;
     }
 
     public double getPoint() {
@@ -64,8 +64,8 @@ public class PT extends JPanel {
     }
 
     public void addTime(double time){
-        this.time += time;
-        timeL.setText("time : " + (int)(this.time / 1000));
+        PT.time += time;
+        timeL.setText("time : " + (int)(PT.time / 1000));
     }
 
     public void addPoint(double point){
@@ -77,7 +77,9 @@ public class PT extends JPanel {
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addTime(1000);
+                if (BricksBreaker.isRunning) {
+                    addTime(1000);
+                }
             }
         });
         time = 0;

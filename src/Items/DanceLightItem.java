@@ -22,9 +22,11 @@ public class DanceLightItem extends SpecialItem{
     static MyColor ballItemColorT = new MyColor(0 ,255 ,0);
     static MyColor speedItemColorT = new MyColor(255 ,0 ,0);
     static MyColor powerItemColorT = new MyColor(0 ,0 ,255);
+    static MyColor dizzyItemColorT = new MyColor(255 ,255 ,0);
     static boolean itemVisibility;
     static boolean ballVisibility;
     static boolean brickVisibility;
+    static Color ballColor;
 
     @Override
     public void gravity() {
@@ -33,6 +35,7 @@ public class DanceLightItem extends SpecialItem{
 
     @Override
     void ability() {
+        ballColor = BricksBreaker.ballColor;
         reset();
         if (timerColor != null){
             if (timerColor.isRunning())
@@ -49,6 +52,7 @@ public class DanceLightItem extends SpecialItem{
                     ballItemColorT.add();
                     speedItemColorT.add();
                     powerItemColorT.add();
+                    dizzyItemColorT.add();
 
                     BricksBreaker.ballColor = new Color(ballColorT.getR() ,ballColorT.getG() ,ballColorT.getB());
                     BricksBreaker.brickColor = new Color(brickColorT.getR() ,brickColorT.getG() ,brickColorT.getB());
@@ -56,6 +60,7 @@ public class DanceLightItem extends SpecialItem{
                     BricksBreaker.ballItemColor = new Color(ballItemColorT.getR() ,ballItemColorT.getG() ,ballItemColorT.getB());
                     BricksBreaker.speedItemColor = new Color(speedItemColorT.getR() ,speedItemColorT.getG() ,speedItemColorT.getB());
                     BricksBreaker.powerItemColor = new Color(powerItemColorT.getR() ,powerItemColorT.getG() ,powerItemColorT.getB());
+                    BricksBreaker.dizzyItemColor = new Color(dizzyItemColorT.getR() ,dizzyItemColorT.getG() ,dizzyItemColorT.getB());
                     GamePanel.bricksBreaker.revalidate();
                     GamePanel.bricksBreaker.repaint();
                 }
@@ -110,13 +115,15 @@ public class DanceLightItem extends SpecialItem{
         ballItemColorT = new MyColor(0 ,255 ,0);
         speedItemColorT = new MyColor(255 ,0 ,0);
         powerItemColorT = new MyColor(0 ,0 ,255);
+        dizzyItemColorT = new MyColor(255 ,255 ,0);
 
-        BricksBreaker.ballColor = Color.WHITE;
+        BricksBreaker.ballColor = ballColor;
         BricksBreaker.brickColor = Color.WHITE;
         BricksBreaker.backgroundColor = Color.BLACK;
         BricksBreaker.ballItemColor = Color.GREEN;
         BricksBreaker.speedItemColor = Color.RED;
         BricksBreaker.powerItemColor = Color.BLUE;
+        BricksBreaker.dizzyItemColor = Color.YELLOW;
 
         for (int i = 0; i < BricksBreaker.oigArrayList.size() ;i++){
             BricksBreaker.oigArrayList.get(i).setVisible(true);

@@ -197,24 +197,25 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (BricksBreaker.inTurn && BricksBreaker.currentBallAimed != ballCountClone){
-                        double x,y;
-                        y = BricksBreaker.aimingSecondPoint.y - BricksBreaker.aimingFirstPoint.y;
-                        x = BricksBreaker.aimingSecondPoint.x - BricksBreaker.aimingFirstPoint.x;
-                        double m = x/y;
-                        double yVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity ,2) / (Math.pow(m ,2) + 1));
-                        double xVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity ,2) - Math.pow(yVelocity ,2));
-                        BricksBreaker.oigArrayList.add(new Ball(
-                                BricksBreaker.aimingFirstPoint.x,
-                                BricksBreaker.aimingFirstPoint.y,
-                                xVelocity * (x / Math.abs(x)) ,
-                                yVelocity * (y / Math.abs(y)),
-                                BricksBreaker.ballRadios
-                        ));
-                        BricksBreaker.currentBallAimed++;
-                    }
-                    else {
-                        BricksBreaker.ballAimingTimer.stop();
+                    if (isRunning) {
+                        if (BricksBreaker.inTurn && BricksBreaker.currentBallAimed != ballCountClone) {
+                            double x, y;
+                            y = BricksBreaker.aimingSecondPoint.y - BricksBreaker.aimingFirstPoint.y;
+                            x = BricksBreaker.aimingSecondPoint.x - BricksBreaker.aimingFirstPoint.x;
+                            double m = x / y;
+                            double yVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity, 2) / (Math.pow(m, 2) + 1));
+                            double xVelocity = Math.sqrt(Math.pow(BricksBreaker.ballVelocity, 2) - Math.pow(yVelocity, 2));
+                            BricksBreaker.oigArrayList.add(new Ball(
+                                    BricksBreaker.aimingFirstPoint.x,
+                                    BricksBreaker.aimingFirstPoint.y,
+                                    xVelocity * (x / Math.abs(x)),
+                                    yVelocity * (y / Math.abs(y)),
+                                    BricksBreaker.ballRadios
+                            ));
+                            BricksBreaker.currentBallAimed++;
+                        } else {
+                            BricksBreaker.ballAimingTimer.stop();
+                        }
                     }
                 }
             });

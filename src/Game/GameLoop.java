@@ -92,7 +92,7 @@ public class GameLoop extends Thread{
                             if (ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20){
                                 ballX = BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20;
                             }
-                            BricksBreaker.aimingFirstPoint.setLocation(ballX ,ballY);
+                            BricksBreaker.newAimPoint.setLocation(ballX ,ballY);
                             BricksBreaker.newAim = true;
                         }
                         BricksBreaker.oigArrayList.remove(ball);
@@ -159,6 +159,9 @@ public class GameLoop extends Thread{
         if (!BricksBreaker.newAim){
             Random random = new Random();
             BricksBreaker.aimingFirstPoint.setLocation(random.nextInt(BricksBreaker.GAME_WIDTH - 4*BricksBreaker.ballRadios) + 2*BricksBreaker.ballRadios ,BricksBreaker.GAME_HEIGHT);
+        }
+        else {
+            BricksBreaker.aimingFirstPoint.setLocation(BricksBreaker.newAimPoint.getX() ,BricksBreaker.newAimPoint.getY());
         }
         BricksBreaker.newAim = false;
         BricksBreaker.ballCount ++;

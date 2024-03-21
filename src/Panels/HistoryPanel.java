@@ -20,6 +20,7 @@ public class HistoryPanel extends JPanel {
         this.setBounds(0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
         this.setVisible(false);
         this.setLayout(null);
+        this.setBackground(Color.BLACK);
 
         container = new Container();
         container.setLayout(new GridLayout(1000 ,4 ,10 ,50));
@@ -56,7 +57,8 @@ public class HistoryPanel extends JPanel {
         this.remove(jScrollPane);
         container = new Container();
         container.setLayout(new GridLayout(1000 ,1 ,10 ,50));
-        container.setBounds(0 ,0 ,Game.GAME_WIDTH ,50000);
+        container.setBounds(0 ,0 ,Game.GAME_WIDTH ,5000);
+        container.setBackground(Color.BLACK);
         try {
             FileInputStream fileOutputStream = new FileInputStream("src/Game/History.txt");
             Scanner scanner = new Scanner(fileOutputStream);
@@ -72,6 +74,8 @@ public class HistoryPanel extends JPanel {
 
                 JLabel label = new JLabel("name : " + name + "  point : " + point + "  date and time : " + date);
                 label.setFont(new Font(null ,Font.BOLD ,20));
+                label.setOpaque(true);
+                label.setBackground(Color.CYAN);
                 container.add(label);
             }
         }
@@ -80,7 +84,7 @@ public class HistoryPanel extends JPanel {
         }
         jScrollPane = new JScrollPane(container ,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane.setBounds(0 ,0 ,Game.GAME_WIDTH ,Game.GAME_HEIGHT * 5 / 6);
-
+        jScrollPane.setBackground(Color.BLACK);
         this.add(jScrollPane);
     }
 }

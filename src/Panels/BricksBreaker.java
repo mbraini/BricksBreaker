@@ -37,6 +37,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static boolean dizzy = false;
     public static Point aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static Point aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
+    public static Point newAimPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static ArrayList<OIG> oigArrayList;
     public static Timer ballAimingTimer;
     public static final int ballAimingDelay = 70;
@@ -84,12 +85,14 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                 if (e.getKeyChar() == 'P' || e.getKeyChar() == 'p'){
                     isRunning = false;
                     gameLoop = null;
+                    PT.pause.setBackground(Color.RED);
                 }
                 else if (e.getKeyChar() == 'R' || e.getKeyChar() == 'r'){
                     if (!isRunning) {
                         isRunning = true;
                         gameLoop = new GameLoop(GamePanel.bricksBreaker);
                         gameLoop.start();
+                        PT.pause.setBackground(Color.WHITE);
                     }
                 }
             }
@@ -205,6 +208,9 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!inTurn && aimingSecondPoint.x != aimingFirstPoint.x && aimingSecondPoint.y != aimingFirstPoint.y && isRunning){
+            if (dizzy){
+                dizzy = false;
+            }
             inTurn = true;
             int ballCountClone = ballCount;
             ballAimingTimer = new Timer(ballAimingDelay, new ActionListener() {
@@ -225,12 +231,10 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                                     yVelocity * (y / Math.abs(y)),
                                     BricksBreaker.ballRadios
                             ));
+                            ((Ball)oigArrayList.get(oigArrayList.size() - 1)).move();
                             BricksBreaker.currentBallAimed++;
                         } else {
                             BricksBreaker.ballAimingTimer.stop();
-                            if (dizzy){
-                                dizzy = false;
-                            }
                         }
                     }
                 }

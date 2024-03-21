@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PT extends JPanel {
-    JLabel pause;
-    JLabel resume;
+    public static JLabel pause;
+    public static JLabel resume;
     JLabel timeL;
     JLabel pointL;
     Timer timer;

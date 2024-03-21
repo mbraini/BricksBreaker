@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PT extends JPanel {
+    JLabel pause;
+    JLabel resume;
     JLabel timeL;
     JLabel pointL;
     Timer timer;
@@ -34,7 +36,33 @@ public class PT extends JPanel {
         this.setLayout(null);
         this.setBounds(0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT / 10);
         this.setBackground(Color.YELLOW);
+        
+        initPause();
+        initResume();
     }
+
+    private void initPause() {
+        pause = new JLabel();
+        pause.setBounds(getWidth() * 4 / 5,0 ,getWidth() / 5,getHeight() / 2);
+        pause.setText("Pause : P");
+        pause.setBackground(Color.WHITE);
+        pause.setOpaque(true);
+        pause.setHorizontalAlignment(JLabel.CENTER);
+        pause.setVerticalAlignment(JLabel.CENTER);
+        this.add(pause);
+    }
+
+    private void initResume() {
+        resume = new JLabel();
+        resume.setBounds(getWidth() * 4 / 5,getHeight() / 2 ,getWidth() / 5,getHeight() / 2);
+        resume.setText("Resume : R");
+        resume.setBackground(Color.WHITE);
+        resume.setOpaque(true);
+        resume.setHorizontalAlignment(JLabel.CENTER);
+        resume.setVerticalAlignment(JLabel.CENTER);
+        this.add(resume);
+    }
+
     public void addTime(double time){
         this.time += time;
         timeL.setText("time : " + (int)(this.time / 1000));

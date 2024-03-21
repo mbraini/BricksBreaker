@@ -34,6 +34,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static boolean isRunning;
     public static boolean inTurn = false;
     public static boolean newAim = false;
+    public static boolean dizzy = false;
     public static Point aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static Point aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
     public static ArrayList<OIG> oigArrayList;
@@ -42,6 +43,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color ballItemColor = Color.GREEN;
     public static Color speedItemColor = Color.RED;
     public static Color powerItemColor = Color.BLUE;
+    public static Color dizzyItemColor = Color.YELLOW;
     public GameLoop gameLoop;
 
     public BricksBreaker(){
@@ -121,7 +123,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
         Random random = new Random();
-        int itemPossibility = random.nextInt(150);
+        int itemPossibility = random.nextInt(180);
         Item item;
         if (itemPossibility < 80) {
             item = new BallItem(0, 0);
@@ -135,7 +137,11 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             item = new SpeedItem(0, 0);
             oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
-        else if (itemPossibility < 145){
+        else if (itemPossibility < 170) {
+            item = new DizzyItem(0, 0);
+            oigArrayList.add(new DizzyItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 175){
             item = new EarthquakeItem();
             oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
             ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
@@ -169,6 +175,13 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             }
             double m = ((aimingFirstPoint.y - y) / (double) (aimingFirstPoint.x - x));
             double cx = aimingFirstPoint.getX(), cy = aimingFirstPoint.getY();
+
+            if (dizzy){
+                Random random = new Random();
+                int xr = random.nextInt(GAME_WIDTH - 20) + 25;
+                int yr = random.nextInt(GAME_HEIGHT - brickInitialY * 2 - 20) + 25;
+                m = (aimingFirstPoint.getY() - yr) / (aimingFirstPoint.getX() - xr);
+            }
             boolean flag = false;
             for (double j = 0 ;j < BricksBreaker.GAME_HEIGHT ;j++){
                 if (flag)
@@ -215,6 +228,9 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                             BricksBreaker.currentBallAimed++;
                         } else {
                             BricksBreaker.ballAimingTimer.stop();
+                            if (dizzy){
+                                dizzy = false;
+                            }
                         }
                     }
                 }
@@ -269,6 +285,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         isRunning = false;
         inTurn = false;
         newAim = false;
+        dizzy = false;
         aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
         aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
 

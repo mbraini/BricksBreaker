@@ -113,7 +113,6 @@ public class GameLoop extends Thread{
                 Brick brick = (Brick) BricksBreaker.oigArrayList.get(i);
                 if (brick.getY() >= BricksBreaker.GAME_HEIGHT - BricksBreaker.brickHeight / 2d){
                     GamePanel.stop();
-                    Game.endGamePanel.setVisible(true);
                     return;
                 }
             }

@@ -12,6 +12,7 @@ public class EndGamePanel extends JPanel {
     static JButton menu;
     static JButton playAgain;
     static JButton prepGame;
+    static JLabel point;
 
     public EndGamePanel(){
         this.setLayout(null);
@@ -21,6 +22,7 @@ public class EndGamePanel extends JPanel {
         InitiateMenu();
         InitiatePrepGame();
         InitiatePlayAgain();
+        InitiatePoint();
 
         menu.addActionListener(new ActionListener() {
             @Override
@@ -47,6 +49,19 @@ public class EndGamePanel extends JPanel {
         });
 
 
+    }
+
+    private void InitiatePoint() {
+        point = new JLabel();
+        point.setBounds(Game.GAME_WIDTH/3,Game.GAME_HEIGHT * 4 / 6,Game.GAME_WIDTH / 3,Game.GAME_HEIGHT / 6);
+        point.setText("Your Record");
+        point.setBackground(Color.WHITE);
+        point.setOpaque(true);
+        point.setFont(new Font(null,Font.BOLD ,10));
+        point.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
+        point.setHorizontalAlignment(JLabel.CENTER);
+        point.setVerticalAlignment(JLabel.CENTER);
+        this.add(point);
     }
 
 
@@ -87,5 +102,10 @@ public class EndGamePanel extends JPanel {
         prepGame.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
         prepGame.setFocusable(false);
         this.add(prepGame);
+    }
+
+    public void start(double point){
+        this.setVisible(true);
+        EndGamePanel.point.setText("Your Score : " + point);
     }
 }

@@ -36,8 +36,9 @@ public class GamePanel extends JPanel {
     }
 
     static public void stop(){
-        Game.gamePanel.setVisible(false);
+        bricksBreaker.setVisible(false);
         bricksBreaker.stop();
+        Game.gamePanel.setVisible(false);
         Game.endGamePanel.start(pt.point);
         pt.stop();
     }

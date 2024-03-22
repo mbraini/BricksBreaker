@@ -31,24 +31,24 @@ public class SpeedItem extends OrdinaryItem{
         }
         time = PT.time;
         double V;
-        BricksBreaker.ballVelocity = 6;
+        BricksBreaker.ballVelocity = 7;
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                 Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
                 V = Math.sqrt( Math.pow(ball.getxVelocity() ,2) + Math.pow(ball.getyVelocity() ,2) );
-                ball.setxVelocity(ball.getxVelocity() * (6d /V));
-                ball.setyVelocity(ball.getyVelocity() * (6d /V));
+                ball.setxVelocity(ball.getxVelocity() * (7d /V));
+                ball.setyVelocity(ball.getyVelocity() * (7d /V));
             }
         }
         ability = new Timer(100, speedAL);
         speedAL.ability = ability;
-        BricksBreaker.ballVelocity = 12;
+        BricksBreaker.ballVelocity = 14;
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                 Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
                 V = Math.sqrt( Math.pow(ball.getxVelocity() ,2) + Math.pow(ball.getyVelocity() ,2) );
-                ball.setxVelocity(ball.getxVelocity() * (12d /V));
-                ball.setyVelocity(ball.getyVelocity() * (12d /V));
+                ball.setxVelocity(ball.getxVelocity() * (14d /V));
+                ball.setyVelocity(ball.getyVelocity() * (14d /V));
             }
         }
         ability.start();

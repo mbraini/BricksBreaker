@@ -7,6 +7,7 @@ import Items.OrdinaryItem;
 import Panels.BricksBreaker;
 import Panels.EndGamePanel;
 import Panels.GamePanel;
+import Panels.MainPanel;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -39,7 +40,10 @@ public class GameLoop extends Thread{
         bricksBreaker.revalidate();
         bricksBreaker.repaint();
         bricksBreaker.setBackground(BricksBreaker.backgroundColor);
-        checkEndGame();
+        if (checkEndGame()) {
+            GamePanel.stop();
+            return;
+        }
         if (!BricksBreaker.isRunning){
             return;
         }
@@ -83,7 +87,7 @@ public class GameLoop extends Thread{
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
-                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT) {
+                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT + BricksBreaker.ballRadios) {
                         if (!BricksBreaker.newAim){
                             double ballX = ball.getX(), ballY = ball.getY();
                             if (ball.getX() <= BricksBreaker.ballRadios + 20){
@@ -101,22 +105,22 @@ public class GameLoop extends Thread{
                 }
             }
             checkBricksHP();
-            if (BallsRemoved() && BricksBreaker.currentBallAimed != 0){
+            if (BallsRemoved() && !BricksBreaker.ballAimingTimer.isRunning()){
                 nextTurn();
             }
         }
     }
 
-    private void checkEndGame() {
+    private boolean checkEndGame() {
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
                 Brick brick = (Brick) BricksBreaker.oigArrayList.get(i);
                 if (brick.getY() >= BricksBreaker.GAME_HEIGHT - BricksBreaker.brickHeight / 2d){
-                    GamePanel.stop();
-                    return;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
 

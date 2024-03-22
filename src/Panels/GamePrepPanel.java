@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Game.*;
+import Items.DanceLightItem;
 
 public class GamePrepPanel extends JPanel {
 
@@ -62,6 +63,7 @@ public class GamePrepPanel extends JPanel {
                 BricksBreaker.ballColor = color;
                 ballColorL.setBackground(color);
                 ballColorB.setBackground(color);
+                DanceLightItem.ballColor = color;
             }
         });
 

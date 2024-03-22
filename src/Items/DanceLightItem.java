@@ -26,7 +26,7 @@ public class DanceLightItem extends SpecialItem{
     static boolean itemVisibility;
     static boolean ballVisibility;
     static boolean brickVisibility;
-    static Color ballColor;
+    public static Color ballColor = Color.WHITE;
 
     @Override
     public void gravity() {
@@ -35,7 +35,6 @@ public class DanceLightItem extends SpecialItem{
 
     @Override
     void ability() {
-        ballColor = BricksBreaker.ballColor;
         reset();
         if (timerColor != null){
             if (timerColor.isRunning())

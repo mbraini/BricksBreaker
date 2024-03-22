@@ -3,10 +3,17 @@ package Panels;
 import Game.*;
 import Game.GameLoop;
 import Items.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,11 +53,20 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color powerItemColor = Color.BLUE;
     public static Color dizzyItemColor = Color.YELLOW;
     public GameLoop gameLoop;
+    public static Clip clip;
 
     public BricksBreaker(){
         this.setLayout(null);
         this.setBounds(0,Game.GAME_HEIGHT / 10, Game.GAME_WIDTH, Game.GAME_HEIGHT * 9 / 10);
         this.setBackground(backgroundColor);
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/Game/Song.wav").getAbsoluteFile());
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+        }
+        catch (Exception e){
+            System.out.println("Song Not Found");
+        }
     }
 
     @Override
@@ -67,6 +83,11 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     }
 
     public void start(){
+        if (Game.SongTheme){
+            clip.setMicrosecondPosition(0);
+            clip.start();
+        }
+
         if (difficulty == null){
             difficulty = "Medium";
         }
@@ -86,6 +107,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                     isRunning = false;
                     gameLoop = null;
                     PT.pause.setBackground(Color.RED);
+                    if (Game.SongTheme)
+                        clip.stop();
                 }
                 else if (e.getKeyChar() == 'R' || e.getKeyChar() == 'r'){
                     if (!isRunning) {
@@ -93,6 +116,8 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
                         gameLoop = new GameLoop(GamePanel.bricksBreaker);
                         gameLoop.start();
                         PT.pause.setBackground(Color.WHITE);
+                        if (Game.SongTheme)
+                            clip.start();
                     }
                 }
             }
@@ -318,5 +343,9 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         ballItemColor = Color.GREEN;
         speedItemColor = Color.RED;
         powerItemColor = Color.BLUE;
+
+        if (Game.SongTheme){
+            clip.stop();
+        }
     }
 }

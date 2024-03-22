@@ -40,6 +40,13 @@ public class GameLoop extends Thread{
         bricksBreaker.revalidate();
         bricksBreaker.repaint();
         bricksBreaker.setBackground(BricksBreaker.backgroundColor);
+        if (Game.SongTheme && BricksBreaker.isRunning){
+            if (!BricksBreaker.clip.isRunning()){
+                BricksBreaker.clip.setMicrosecondPosition(0);
+                BricksBreaker.clip.start();
+                System.out.println("START AGAIN!");
+            }
+        }
         if (checkEndGame()) {
             GamePanel.stop();
             return;

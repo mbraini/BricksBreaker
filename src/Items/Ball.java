@@ -49,50 +49,48 @@ public class Ball extends OIG implements Moveable {
 
         yVelocity = -yVelocity;
         move();
-        if (hasCollision(bricks) || borderCollision()){
-            reset(xI ,yI ,xVelocityI ,yVelocityI);
+        CF();
+
+        if (hasCollision(bricks) || borderCollision()) {
+            reset(xI, yI, xVelocityI, yVelocityI);
 
             xVelocity = -xVelocity;
             move();
-            if (hasCollision(bricks) || borderCollision()){
-                reset(xI ,yI ,xVelocityI ,yVelocityI);
+            CF();
+            if (hasCollision(bricks) || borderCollision()) {
+                reset(xI, yI, xVelocityI, yVelocityI);
 
                 xVelocity = -xVelocity;
                 yVelocity = -yVelocity;
                 move();
-                if (hasCollision(bricks) || borderCollision()){
+                CF();
+                if (hasCollision(bricks) || borderCollision()) {
+                    decreaseHP(bricks);
                     BricksBreaker.oigArrayList.remove(this);
-                    System.out.println("JZZZZZZZZZZZZ");
                 }
                 else {
-                    for (int i = 0; i < bricks.size() ;i++){
-                        bricks.get(i).decreesHP();
-                    }
-                    reset(xI ,yI ,xVelocityI ,yVelocityI);
+                    decreaseHP(bricks);
+                    reset(xI, yI, xVelocityI, yVelocityI);
                     xVelocity = -xVelocity;
                     yVelocity = -yVelocity;
                 }
             }
             else {
-                for (int i = 0; i < bricks.size() ;i++){
-                    bricks.get(i).decreesHP();
-                }
-                reset(xI ,yI ,xVelocityI ,yVelocityI);
+                decreaseHP(bricks);
+                reset(xI, yI, xVelocityI, yVelocityI);
                 xVelocity = -xVelocity;
             }
         }
         else {
-            for (int i = 0; i < bricks.size() ;i++){
-                bricks.get(i).decreesHP();
-            }
-            reset(xI ,yI ,xVelocityI ,yVelocityI);
+            decreaseHP(bricks);
+            reset(xI, yI, xVelocityI, yVelocityI);
             yVelocity = -yVelocity;
         }
     }
 
     boolean hasCollision(ArrayList<Brick> bricks){
         for (int i = 0 ;i < bricks.size() ;i++){
-            if (bricks.get(i).collision(this.x ,this.y ,BricksBreaker.ballRadios)){
+            if (bricks.get(i).collision(this.x ,this.y ,BricksBreaker.ballRadios)){ //////SEEEEEEEEEEEE/////////////
                 return true;
             }
         }
@@ -111,5 +109,26 @@ public class Ball extends OIG implements Moveable {
             return true;
         }
         return false;
+    }
+
+    void decreaseHP(ArrayList<Brick> bricks){
+        for (int i = 0; i < bricks.size(); i++) {
+            bricks.get(i).decreesHP();
+        }
+    }
+
+    void CF(){
+        if (xVelocity >= 0){
+            this.x = Math.ceil(this.x) + 1;
+        }
+        else {
+            this.x = Math.floor(this.x) - 1;
+        }
+        if (yVelocity >= 0){
+            this.y = Math.ceil(this.y) + 1;
+        }
+        else {
+            this.y = Math.floor(this.y) - 1;
+        }
     }
 }

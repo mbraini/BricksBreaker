@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class MainPanel extends JPanel {
     JButton newGame;
@@ -100,4 +103,19 @@ public class MainPanel extends JPanel {
         this.add(settings);
     }
 
+    public void start() {
+        this.setVisible(true);
+        FileInputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileInputStream("src/Game/History.txt");
+
+            Scanner scanner = new Scanner(fileOutputStream);
+            while (scanner.hasNextLine()) {
+
+            }
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

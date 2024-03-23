@@ -91,7 +91,7 @@ public class PT extends JPanel {
 
         pointL = new JLabel();
         pointL.setBounds(getWidth() * 3 / 5 ,getHeight() / 5 ,getWidth() / 5 ,getHeight() * 3 / 5);
-        pointL.setText("points : " + point);
+        pointL.setText("points : " + (int) point);
 
         this.add(timeL);
         this.add(pointL);

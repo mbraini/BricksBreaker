@@ -116,7 +116,7 @@ public class EndGamePanel extends JPanel {
         if (Game.Saving){
             save(point);
         }
-        EndGamePanel.point.setText("Your Score : " + point);
+        EndGamePanel.point.setText("Your Score : " + (int) point);
     }
 
     private void save(double point) {
@@ -129,7 +129,7 @@ public class EndGamePanel extends JPanel {
             }
             Calendar calendar = Calendar.getInstance();
             Date currentDate = calendar.getTime();
-            strings.add(Game.playerName + " " + point + " " + currentDate.toString());
+            strings.add(Game.playerName + " " + (int) point + " " + currentDate.toString());
             PrintStream ps = new PrintStream("src/Game/History.txt");
             for (int i = 0 ;i < strings.size() ;i++){
                 ps.println(strings.get(i));

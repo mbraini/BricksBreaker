@@ -44,7 +44,6 @@ public class GameLoop extends Thread{
             if (!BricksBreaker.clip.isRunning()){
                 BricksBreaker.clip.setMicrosecondPosition(0);
                 BricksBreaker.clip.start();
-                System.out.println("START AGAIN!");
             }
         }
         if (checkEndGame()) {

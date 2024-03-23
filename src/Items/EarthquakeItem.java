@@ -28,7 +28,7 @@ public class EarthquakeItem extends SpecialItem{
                 brickChanger.stop();
             }
         }
-        brickChanger = new Timer(125, new ActionListener() {
+        brickChanger = new Timer(62, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (BricksBreaker.isRunning) {
@@ -39,10 +39,10 @@ public class EarthquakeItem extends SpecialItem{
                         BricksBreaker.brickWidth += 3;
                         BricksBreaker.brickHeight += 2;
                     }
-                    if (BricksBreaker.brickWidth < 40 || BricksBreaker.brickWidth > 100) {
+                    if (BricksBreaker.brickWidth <= 40 || BricksBreaker.brickWidth >= 100) {
                         flag = !flag;
                     }
-                    if ((PT.time - time) / 1000 >= 10) {
+                    if ((PT.time - time) / 1000 > 10) {
                         reset();
                         brickChanger.stop();
                     }
@@ -60,6 +60,7 @@ public class EarthquakeItem extends SpecialItem{
     }
 
     void reset(){
+        flag = false;
         time = PT.time;
         BricksBreaker.brickWidth = 100;
         BricksBreaker.brickHeight = 80;

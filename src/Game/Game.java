@@ -48,5 +48,6 @@ public class Game {
 
 
         gameFrame.setVisible(true);
+        mainPanel.start();
     }
 }

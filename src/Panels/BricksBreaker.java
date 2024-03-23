@@ -306,6 +306,26 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     public void stop(){
         gameLoop.interrupt();
+        if (SpeedItem.ability != null) {
+            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
+            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
+        }
+
+        if (DanceLightItem.timerColor != null) {
+            DanceLightItem.timerVisibility.stop();
+            DanceLightItem.timerColor.stop();
+        }
+
+        if (EarthquakeItem.brickChanger != null) {
+            EarthquakeItem.brickChanger.stop();
+        }
+
+        if (PowerItem.ability != null){
+            PowerItem.ability.stop();
+        }
+        if (ballAimingTimer != null) {
+            ballAimingTimer.stop();
+        }
         gameLoop = null;
         brickColor = Color.WHITE;
         backgroundColor = Color.BLACK;
@@ -326,31 +346,13 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         aimingFirstPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
         aimingSecondPoint = new Point(GAME_WIDTH / 2 ,GAME_HEIGHT);
 
-        if (SpeedItem.ability != null) {
-            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
-            SpeedItem.ability.removeActionListener(SpeedItem.speedAL);
-        }
-
-        if (DanceLightItem.timerColor != null) {
-            DanceLightItem.timerVisibility.stop();
-            DanceLightItem.timerColor.stop();
-        }
-
-        if (EarthquakeItem.brickChanger != null) {
-            EarthquakeItem.brickChanger.stop();
-        }
-
-        if (PowerItem.ability != null){
-            PowerItem.ability.stop();
-        }
 
         oigArrayList = null;
-        if (ballAimingTimer != null)
-            ballAimingTimer.stop();
         ballAimingTimer = null;
         ballItemColor = Color.GREEN;
         speedItemColor = Color.RED;
         powerItemColor = Color.BLUE;
+        DanceLightItem.reset();
 
         if (Game.SongTheme){
             clip.stop();

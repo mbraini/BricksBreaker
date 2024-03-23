@@ -105,7 +105,7 @@ public class DanceLightItem extends SpecialItem{
         g.drawString("DANCE" ,(int) (brick.getX() + BricksBreaker.brickWidth / 5) ,(int) (brick.getY() + BricksBreaker.brickHeight / 4 * 3));
     }
 
-    void reset(){
+    public static void reset(){
         timeColor = PT.time;
         timeVisibility = PT.time;
         ballColorT = new MyColor(255 ,255 ,255);

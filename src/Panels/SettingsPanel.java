@@ -70,7 +70,7 @@ public class SettingsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.settingsPanel.setVisible(false);
-                Game.mainPanel.setVisible(true);
+                Game.mainPanel.start();
             }
         });
     }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainPanel extends JPanel {
@@ -108,10 +109,21 @@ public class MainPanel extends JPanel {
         FileInputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileInputStream("src/Game/History.txt");
-
+            ArrayList<Integer> points = new ArrayList<>();
             Scanner scanner = new Scanner(fileOutputStream);
             while (scanner.hasNextLine()) {
+                String string = scanner.nextLine();
+                String name = string.substring(0 ,string.indexOf(" "));
+                string = string.substring(string.indexOf(" ") + 1);
 
+                String point = string.substring(0 ,string.indexOf(" "));
+                points.add(Integer.valueOf(point));
+            }
+            if (points.isEmpty()){
+                record.setText("You Don't Have A Record!");
+            }
+            else {
+                record.setText("Your Record : " + GameHelper.Max(points));
             }
         }
         catch (FileNotFoundException e) {

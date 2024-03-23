@@ -21,4 +21,14 @@ public class GameHelper {
         }
         return randoms;
     }
+
+    public static int Max(ArrayList<Integer> points) {
+        int max = points.get(0);
+        for (int i = 0 ;i < points.size() ;i++){
+            if (points.get(i) > max){
+                max = points.get(i);
+            }
+        }
+        return max;
+    }
 }

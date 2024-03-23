@@ -35,7 +35,7 @@ public class EndGamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.endGamePanel.setVisible(false);
-                Game.mainPanel.setVisible(true);
+                Game.mainPanel.start();
             }
         });
 

@@ -4,12 +4,8 @@ import Items.Ball;
 import Items.Brick;
 import Items.Item;
 import Items.OrdinaryItem;
-import Panels.BricksBreaker;
-import Panels.EndGamePanel;
-import Panels.GamePanel;
-import Panels.MainPanel;
+import Panels.*;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -40,6 +36,7 @@ public class GameLoop extends Thread{
         bricksBreaker.revalidate();
         bricksBreaker.repaint();
         bricksBreaker.setBackground(BricksBreaker.backgroundColor);
+        checkBrickD();
         if (Game.SongTheme && BricksBreaker.isRunning){
             if (!BricksBreaker.clip.isRunning()){
                 BricksBreaker.clip.setMicrosecondPosition(0);
@@ -119,6 +116,18 @@ public class GameLoop extends Thread{
         }
     }
 
+    private void checkBrickD() {
+        if (BricksBreaker.difficulty.equals("Easy")){
+            BricksBreaker.brickHPD = ((int)PT.time / 1000) / 30 + 1;
+        }
+        else if (BricksBreaker.difficulty.equals("Medium")){
+            BricksBreaker.brickHPD = ((int)PT.time / 1000) / 20 + 1;
+        }
+        else {
+            BricksBreaker.brickHPD = ((int)PT.time / 1000) / 10 + 1;
+        }
+    }
+
     private boolean checkEndGame() {
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
@@ -177,7 +186,7 @@ public class GameLoop extends Thread{
         }
         BricksBreaker.newAim = false;
         BricksBreaker.ballCount ++;
-        BricksBreaker.currentBricksHP++;
+        BricksBreaker.currentBricksHP += BricksBreaker.brickHPD;
         BricksBreaker.inTurn = false;
         bricksBreaker.pushBricks();
         bricksBreaker.addBricksAndItems();

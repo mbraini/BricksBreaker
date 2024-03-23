@@ -3,17 +3,12 @@ package Panels;
 import Game.*;
 import Game.GameLoop;
 import Items.*;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
-import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,6 +33,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int brickWidth = GAME_WIDTH / 6;
     public static int brickHeight = GAME_HEIGHT / 9;
     public static int currentBricksHP = 1;
+    public static int brickHPD = 1;
     public static boolean isRunning;
     public static boolean inTurn = false;
     public static boolean newAim = false;
@@ -151,25 +147,25 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
         Random random = new Random();
-        int itemPossibility = random.nextInt(180);
+        int itemPossibility = random.nextInt(200);
         Item item;
-//        if (itemPossibility < 80) {
-//            item = new BallItem(0, 0);
-//            oigArrayList.add(new BallItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-//        }
-//        else if (itemPossibility < 110) {
-//            item = new PowerItem(0, 0);
-//            oigArrayList.add(new PowerItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-//        }
-//        else if (itemPossibility < 140) {
-//            item = new SpeedItem(0, 0);
-//            oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-//        }
-//        else if (itemPossibility < 170) {
-//            item = new DizzyItem(0, 0);
-//            oigArrayList.add(new DizzyItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-//        }
-        if (itemPossibility < 90){
+        if (itemPossibility < 90) {
+            item = new BallItem(0, 0);
+            oigArrayList.add(new BallItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 120) {
+            item = new PowerItem(0, 0);
+            oigArrayList.add(new PowerItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 150) {
+            item = new SpeedItem(0, 0);
+            oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 180) {
+            item = new DizzyItem(0, 0);
+            oigArrayList.add(new DizzyItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 190){
             item = new EarthquakeItem();
             oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
             ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));

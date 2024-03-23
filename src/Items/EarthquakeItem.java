@@ -55,8 +55,8 @@ public class EarthquakeItem extends SpecialItem{
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.MAGENTA);
-        g.setFont(new Font("Default",Font.BOLD ,14));
-        g.drawString("EARTHQUAKE" ,(int) (brick.getX() + BricksBreaker.brickWidth / 30) ,(int) (brick.getY() + BricksBreaker.brickHeight / 4 * 3));
+        g.setFont(new Font("Default",Font.BOLD ,(int)(20 * BricksBreaker.brickWidth / 100d)));
+        g.drawString("QUAKE" ,(int) (brick.getX() - BricksBreaker.brickWidth / 3) ,(int) (brick.getY() + BricksBreaker.brickHeight / 4));
     }
 
     void reset(){

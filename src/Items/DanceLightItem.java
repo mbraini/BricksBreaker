@@ -101,8 +101,8 @@ public class DanceLightItem extends SpecialItem{
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.MAGENTA);
-        g.setFont(new Font("Default",Font.BOLD ,20));
-        g.drawString("DANCE" ,(int) (brick.getX() + BricksBreaker.brickWidth / 5) ,(int) (brick.getY() + BricksBreaker.brickHeight / 4 * 3));
+        g.setFont(new Font("Default",Font.BOLD ,(int)(20 * BricksBreaker.brickWidth / 100d)));
+        g.drawString("DANCE" ,(int) (brick.getX() - BricksBreaker.brickWidth / 3) ,(int) (brick.getY() + BricksBreaker.brickHeight / 4));
     }
 
     public static void reset(){

@@ -93,18 +93,20 @@ public class GameLoop extends Thread{
             for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
                 if (BricksBreaker.oigArrayList.get(i) instanceof Ball){
                     Ball ball = (Ball)BricksBreaker.oigArrayList.get(i);
-                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT + BricksBreaker.ballRadios) {
+                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT - BricksBreaker.ballRadios){
                         if (!BricksBreaker.newAim){
                             double ballX = ball.getX(), ballY = ball.getY();
-                            if (ball.getX() <= BricksBreaker.ballRadios + 20){
-                                ballX = BricksBreaker.ballRadios + 20;
+                            if (ball.getX() <= 3 * BricksBreaker.ballRadios){
+                                ballX = 3 * BricksBreaker.ballRadios;
                             }
-                            if (ball.getX() >= BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20){
-                                ballX = BricksBreaker.GAME_WIDTH - BricksBreaker.ballRadios - 20;
+                            if (ball.getX() >= BricksBreaker.GAME_WIDTH - 3 * BricksBreaker.ballRadios){
+                                ballX = BricksBreaker.GAME_WIDTH - 3 * BricksBreaker.ballRadios;
                             }
-                            BricksBreaker.newAimPoint.setLocation(ballX ,ballY);
+                            BricksBreaker.newAimPoint.setLocation(ballX ,BricksBreaker.GAME_HEIGHT);
                             BricksBreaker.newAim = true;
                         }
+                    }
+                    if (ball.getY() >= BricksBreaker.GAME_HEIGHT + BricksBreaker.ballRadios) {
                         BricksBreaker.oigArrayList.remove(ball);
                         break;
                     }

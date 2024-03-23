@@ -326,6 +326,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         if (ballAimingTimer != null) {
             ballAimingTimer.stop();
         }
+
         gameLoop = null;
         brickColor = Color.WHITE;
         backgroundColor = Color.BLACK;
@@ -349,10 +350,10 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
         oigArrayList = null;
         ballAimingTimer = null;
+        ballColor = DanceLightItem.ballColor;
         ballItemColor = Color.GREEN;
         speedItemColor = Color.RED;
         powerItemColor = Color.BLUE;
-        DanceLightItem.reset();
 
         if (Game.SongTheme){
             clip.stop();

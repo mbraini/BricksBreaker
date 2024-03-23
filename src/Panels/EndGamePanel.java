@@ -139,4 +139,10 @@ public class EndGamePanel extends JPanel {
 
         }
     }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(Game.gameOver ,-48 ,28 ,null);
+    }
 }

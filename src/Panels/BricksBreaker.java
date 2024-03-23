@@ -34,6 +34,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int brickHeight = GAME_HEIGHT / 9;
     public static int currentBricksHP = 1;
     public static int brickHPD = 1;
+    public static int OIGCount;
     public static boolean isRunning;
     public static boolean inTurn = false;
     public static boolean newAim = false;
@@ -90,6 +91,16 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         oigArrayList = new ArrayList<>();
         gameLoop = new GameLoop(this);
         isRunning = true;
+        if (difficulty.equals("Easy")){
+            OIGCount = 3;
+        }
+        else if (difficulty.equals("Medium")){
+            OIGCount = 4;
+        }
+        else {
+            OIGCount = 5;
+        }
+
         GamePanel.pt.start();
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
@@ -132,17 +143,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     }
 
     public void addBricksAndItems(){
-        int BrickCount;
-        if (difficulty.equals("Easy")){
-            BrickCount = 2;
-        }
-        else if (difficulty.equals("Medium")){
-            BrickCount = 3;
-        }
-        else {
-            BrickCount = 4;
-        }
-        ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(BrickCount);
+        ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(OIGCount);
         for (int i =0 ;i < randoms.size() - 1 ;i++){
             oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
@@ -350,6 +351,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         ballItemColor = Color.GREEN;
         speedItemColor = Color.RED;
         powerItemColor = Color.BLUE;
+        dizzyItemColor = Color.YELLOW;
 
         if (Game.SongTheme){
             clip.stop();

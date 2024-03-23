@@ -37,6 +37,7 @@ public class GameLoop extends Thread{
         bricksBreaker.repaint();
         bricksBreaker.setBackground(BricksBreaker.backgroundColor);
         checkBrickD();
+        checkOIGCount();
         if (Game.SongTheme && BricksBreaker.isRunning){
             if (!BricksBreaker.clip.isRunning()){
                 BricksBreaker.clip.setMicrosecondPosition(0);
@@ -44,6 +45,7 @@ public class GameLoop extends Thread{
             }
         }
         if (checkEndGame()) {
+            this.interrupt();
             GamePanel.stop();
             return;
         }
@@ -113,6 +115,21 @@ public class GameLoop extends Thread{
             if (BallsRemoved() && !BricksBreaker.ballAimingTimer.isRunning()){
                 nextTurn();
             }
+        }
+    }
+
+    private void checkOIGCount() {
+        if (BricksBreaker.OIGCount == 6){
+            return;
+        }
+        if (BricksBreaker.difficulty.equals("Easy")){
+            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 60;
+        }
+        else if (BricksBreaker.difficulty.equals("Medium")){
+            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 50;
+        }
+        else {
+            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 40;
         }
     }
 

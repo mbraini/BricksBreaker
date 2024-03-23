@@ -25,6 +25,8 @@ public class Game {
     static public GamePrepPanel gamePrepPanel;
     static public JPanel panel;
     static public EndGamePanel endGamePanel;
+    static public Image menu;
+    static public Image gameOver;
     public Game() {
 
         gameFrame = new GameFrame();
@@ -45,6 +47,14 @@ public class Game {
         panel.add(gamePrepPanel);
         panel.add(gamePanel);
         panel.add(endGamePanel);
+
+        try {
+            menu = ImageIO.read(new File("src/Game/Menu.png"));
+            gameOver = ImageIO.read(new File("src/Game/GameOver.png"));
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
         gameFrame.setVisible(true);

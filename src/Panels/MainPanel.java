@@ -19,6 +19,7 @@ public class MainPanel extends JPanel {
         this.setLayout(null);
         this.setBounds(0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
         this.setBackground(Color.BLACK);
+
         initNewGameButton();
         initRecordLabel();
         initHistoryButton();
@@ -129,5 +130,11 @@ public class MainPanel extends JPanel {
         catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(Game.menu ,44 ,77 ,null);
     }
 }

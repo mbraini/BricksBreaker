@@ -35,6 +35,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int currentBricksHP = 1;
     public static int brickHPD = 1;
     public static int OIGCount;
+    public static int itemCount;
     public static boolean isRunning;
     public static boolean inTurn = false;
     public static boolean newAim = false;
@@ -96,16 +97,19 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         gameLoop = new GameLoop(this);
         isRunning = true;
         if (difficulty.equals("Easy")){
-            OIGCount = 3;
+            OIGCount = 4;
             gravity = 0.5;
+            itemCount = 3;
         }
         else if (difficulty.equals("Medium")){
             OIGCount = 4;
             gravity = 0.9;
+            itemCount = 2;
         }
         else {
-            OIGCount = 5;
+            OIGCount = 4;
             gravity = 1.3;
+            itemCount = 1;
         }
 
         GamePanel.pt.start();
@@ -151,43 +155,39 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
 
     public void addBricksAndItems(){
         ArrayList<Integer> randoms = GameHelper.GenerateRandomBrickLocation(OIGCount);
-        for (int i =0 ;i < randoms.size() - 1 ;i++){
-            oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
+        for (int i = 0 ;i < itemCount ;i++) {
+            Random random = new Random();
+            int itemPossibility = random.nextInt(230);
+            Item item;
+            if (itemPossibility < 90) {
+                item = new BallItem(0, 0);
+                oigArrayList.add(new BallItem(randoms.get(i) * GAME_WIDTH / 6 + brickWidth / 2, brickHeight / 2));
+            } else if (itemPossibility < 120) {
+                item = new PowerItem(0, 0);
+                oigArrayList.add(new PowerItem(randoms.get(i) * GAME_WIDTH / 6 + brickWidth / 2, brickHeight / 2));
+            } else if (itemPossibility < 150) {
+                item = new SpeedItem(0, 0);
+                oigArrayList.add(new SpeedItem(randoms.get(i) * GAME_WIDTH / 6 + brickWidth / 2, brickHeight / 2));
+            } else if (itemPossibility < 180) {
+                item = new BackwardItem(0, 0);
+                oigArrayList.add(new BackwardItem(randoms.get(i) * GAME_WIDTH / 6 + brickWidth / 2, brickHeight / 2));
+            } else if (itemPossibility < 210) {
+                item = new DizzyItem(0, 0);
+                oigArrayList.add(new DizzyItem(randoms.get(i) * GAME_WIDTH / 6 + brickWidth / 2, brickHeight / 2));
+            } else if (itemPossibility < 220) {
+                item = new EarthquakeItem();
+                oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH / 6 + brickInitialX, brickInitialY, brickWidth, brickHeight, currentBricksHP, (SpecialItem) item));
+                ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
+                oigArrayList.add(item);
+            } else {
+                item = new DanceLightItem();
+                oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH / 6 + brickInitialX, brickInitialY, brickWidth, brickHeight, currentBricksHP, (SpecialItem) item));
+                ((DanceLightItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
+                oigArrayList.add(item);
+            }
         }
-        Random random = new Random();
-        int itemPossibility = random.nextInt(230);
-        Item item;
-        if (itemPossibility < 90) {
-            item = new BallItem(0, 0);
-            oigArrayList.add(new BallItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-        }
-        else if (itemPossibility < 120) {
-            item = new PowerItem(0, 0);
-            oigArrayList.add(new PowerItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-        }
-        else if (itemPossibility < 150) {
-            item = new SpeedItem(0, 0);
-            oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-        }
-        else if (itemPossibility < 180) {
-            item = new BackwardItem(0, 0);
-            oigArrayList.add(new BackwardItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-        }
-        else if (itemPossibility < 210) {
-            item = new DizzyItem(0, 0);
-            oigArrayList.add(new DizzyItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
-        }
-        else if (itemPossibility < 220){
-            item = new EarthquakeItem();
-            oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
-            ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
-            oigArrayList.add(item);
-        }
-        else {
-            item = new DanceLightItem();
-            oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
-            ((DanceLightItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
-            oigArrayList.add(item);
+        for (int i =0 ;i < randoms.size() - itemCount ;i++){
+            oigArrayList.add(new Brick(randoms.get(i + itemCount) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
     }
 

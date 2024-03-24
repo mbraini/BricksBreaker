@@ -23,7 +23,16 @@ public class BackwardItem extends OrdinaryItem{
         for (int i = 0 ;i < BricksBreaker.oigArrayList.size() ;i++){
             if ((BricksBreaker.oigArrayList.get(i) instanceof Brick || BricksBreaker.oigArrayList.get(i) instanceof OrdinaryItem) && BricksBreaker.oigArrayList.get(i) != this){
                 if (BricksBreaker.oigArrayList.get(i).getY() <= 2.5 * BricksBreaker.brickWidth){
-                    BricksBreaker.oigArrayList.remove(i);
+                    if (BricksBreaker.oigArrayList.get(i) instanceof Brick){
+                        ((Brick)BricksBreaker.oigArrayList.get(i)).Break();
+                    }
+                    else if (!(BricksBreaker.oigArrayList.get(i) instanceof BackwardItem)){ //////////////////////
+                        ((OrdinaryItem)BricksBreaker.oigArrayList.get(i)).ability();
+                        BricksBreaker.oigArrayList.remove(i);
+                    }
+                    else {
+                        BricksBreaker.oigArrayList.remove(i);
+                    }
                     i--;
                 }
                 else {

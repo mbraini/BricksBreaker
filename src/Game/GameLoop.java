@@ -123,13 +123,16 @@ public class GameLoop extends Thread{
             return;
         }
         if (BricksBreaker.difficulty.equals("Easy")){
-            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 60;
+            BricksBreaker.OIGCount = ((int)PT.time / 1000) / 60 + 4;
         }
         else if (BricksBreaker.difficulty.equals("Medium")){
-            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 50;
+            BricksBreaker.OIGCount = ((int)PT.time / 1000) / 50 + 4;
         }
         else {
-            BricksBreaker.OIGCount += ((int)PT.time / 1000) / 40;
+            BricksBreaker.OIGCount = ((int)PT.time / 1000) / 40 + 4;
+        }
+        if (BricksBreaker.OIGCount > 6){
+            BricksBreaker.OIGCount = 6;
         }
     }
 

@@ -64,7 +64,7 @@ public class EndGamePanel extends JPanel {
         point.setText("Your Record");
         point.setBackground(Color.WHITE);
         point.setOpaque(true);
-        point.setFont(new Font(null,Font.BOLD ,10));
+        point.setFont(new Font(null,Font.BOLD ,15));
         point.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
         point.setHorizontalAlignment(JLabel.CENTER);
         point.setVerticalAlignment(JLabel.CENTER);
@@ -75,6 +75,7 @@ public class EndGamePanel extends JPanel {
     void InitiateMenu(){
         menu = new JButton();
         menu.setBounds(0,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/3,Game.GAME_HEIGHT/6);
+        menu.setFont(new Font(null,Font.BOLD ,15));
         menu.setText("Menu");
         menu.setBackground(Color.WHITE);
         menu.setOpaque(true);
@@ -88,6 +89,7 @@ public class EndGamePanel extends JPanel {
     void InitiatePlayAgain(){
         playAgain = new JButton();
         playAgain.setBounds(Game.GAME_WIDTH / 3 ,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/3,Game.GAME_HEIGHT/6);
+        playAgain.setFont(new Font(null,Font.BOLD ,15));
         playAgain.setText("Play Again");
         playAgain.setBackground(Color.WHITE);
         playAgain.setOpaque(true);
@@ -101,6 +103,7 @@ public class EndGamePanel extends JPanel {
     void InitiatePrepGame(){
         prepGame = new JButton();
         prepGame.setBounds(Game.GAME_WIDTH / 3 * 2 ,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/3,Game.GAME_HEIGHT/6);
+        prepGame.setFont(new Font(null,Font.BOLD ,15));
         prepGame.setText("Play With New Settings");
         prepGame.setBackground(Color.WHITE);
         prepGame.setOpaque(true);

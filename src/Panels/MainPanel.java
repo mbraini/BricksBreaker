@@ -73,8 +73,8 @@ public class MainPanel extends JPanel {
         record.setText("Your Record");
         record.setBackground(Color.WHITE);
         record.setOpaque(true);
-        record.setHorizontalTextPosition(JLabel.RIGHT);
-        record.setVerticalTextPosition(JLabel.TOP);
+        record.setHorizontalAlignment(JLabel.CENTER);
+        record.setVerticalAlignment(JLabel.CENTER);
         record.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
         this.add(record);
     }

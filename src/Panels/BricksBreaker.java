@@ -29,7 +29,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static int currentBallAimed = 0;
     public static int ballRadios = 10;
     public static int itemRadios = 10;
-    public static int gravity = 1;
+    public static double gravity = 1;
     public static int brickWidth = GAME_WIDTH / 6;
     public static int brickHeight = GAME_HEIGHT / 9;
     public static int currentBricksHP = 1;
@@ -93,12 +93,15 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         isRunning = true;
         if (difficulty.equals("Easy")){
             OIGCount = 3;
+            gravity = 0.5;
         }
         else if (difficulty.equals("Medium")){
             OIGCount = 4;
+            gravity = 0.9;
         }
         else {
             OIGCount = 5;
+            gravity = 1.3;
         }
 
         GamePanel.pt.start();

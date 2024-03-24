@@ -36,8 +36,8 @@ public class GamePrepPanel extends JPanel {
         userNameL.setBounds(Game.GAME_WIDTH/7 ,Game.GAME_HEIGHT/9 * 5 ,Game.GAME_WIDTH/7 ,Game.GAME_HEIGHT/9);
         userNameL.setOpaque(true);
         userNameL.setBackground(Color.WHITE);
-        userNameL.setHorizontalTextPosition(JLabel.CENTER);
-        userNameL.setVerticalTextPosition(JLabel.CENTER);
+        userNameL.setHorizontalAlignment(JLabel.CENTER);
+        userNameL.setVerticalAlignment(JLabel.CENTER);
         this.add(userNameL);
 
         userNameB = new JButton("Submit");
@@ -138,8 +138,8 @@ public class GamePrepPanel extends JPanel {
         ballColorL.setBounds(Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9 * 3 ,Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9);
         ballColorL.setOpaque(true);
         ballColorL.setBackground(Color.WHITE);
-        ballColorL.setHorizontalTextPosition(JLabel.CENTER);
-        ballColorL.setVerticalTextPosition(JLabel.CENTER);
+        ballColorL.setHorizontalAlignment(JLabel.CENTER);
+        ballColorL.setVerticalAlignment(JLabel.CENTER);
         this.add(ballColorL);
 
         ballColorB = new JButton("Choose Color");
@@ -157,8 +157,8 @@ public class GamePrepPanel extends JPanel {
         difficultyL.setBounds(Game.GAME_WIDTH/7 ,Game.GAME_HEIGHT/9 ,Game.GAME_WIDTH/7 ,Game.GAME_HEIGHT/9);
         difficultyL.setOpaque(true);
         difficultyL.setBackground(Color.WHITE);
-        difficultyL.setHorizontalTextPosition(JLabel.CENTER);
-        difficultyL.setVerticalTextPosition(JLabel.CENTER);
+        difficultyL.setHorizontalAlignment(JLabel.CENTER);
+        difficultyL.setVerticalAlignment(JLabel.CENTER);
         this.add(difficultyL);
 
 

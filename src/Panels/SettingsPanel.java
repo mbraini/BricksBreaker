@@ -91,8 +91,8 @@ public class SettingsPanel extends JPanel {
         aimingL.setBounds(Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9 ,Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9);
         aimingL.setOpaque(true);
         aimingL.setBackground(Color.WHITE);
-        aimingL.setHorizontalTextPosition(JLabel.CENTER);
-        aimingL.setVerticalTextPosition(JLabel.CENTER);
+        aimingL.setHorizontalAlignment(JLabel.CENTER);
+        aimingL.setVerticalAlignment(JLabel.CENTER);
         this.add(aimingL);
 
         String value;
@@ -118,8 +118,8 @@ public class SettingsPanel extends JPanel {
         songThemeL.setBounds(Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9 * 3 ,Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9);
         songThemeL.setOpaque(true);
         songThemeL.setBackground(Color.WHITE);
-        songThemeL.setHorizontalTextPosition(JLabel.CENTER);
-        songThemeL.setVerticalTextPosition(JLabel.CENTER);
+        songThemeL.setHorizontalAlignment(JLabel.CENTER);
+        songThemeL.setVerticalAlignment(JLabel.CENTER);
         this.add(songThemeL);
 
         String value;
@@ -145,8 +145,8 @@ public class SettingsPanel extends JPanel {
         savingL.setBounds(Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9 * 5 ,Game.GAME_WIDTH/5 ,Game.GAME_HEIGHT/9);
         savingL.setOpaque(true);
         savingL.setBackground(Color.WHITE);
-        savingL.setHorizontalTextPosition(JLabel.CENTER);
-        savingL.setVerticalTextPosition(JLabel.CENTER);
+        savingL.setHorizontalAlignment(JLabel.CENTER);
+        savingL.setVerticalAlignment(JLabel.CENTER);
         this.add(savingL);
 
         String value;

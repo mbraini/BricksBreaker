@@ -14,6 +14,7 @@ public class MainPanel extends JPanel {
     JLabel record;
     JButton history;
     JButton settings;
+    JButton exit;
 
     public MainPanel(){
         this.setLayout(null);
@@ -24,6 +25,7 @@ public class MainPanel extends JPanel {
         initRecordLabel();
         initHistoryButton();
         initSettingsButton();
+        initExitButton();
         setActionListeners();
     }
 
@@ -52,11 +54,18 @@ public class MainPanel extends JPanel {
                 Game.settingsPanel.setVisible(true);
             }
         });
+
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     void initNewGameButton(){
         newGame = new JButton();
-        newGame.setBounds(0,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/4,Game.GAME_HEIGHT/6);
+        newGame.setBounds(0,Game.GAME_HEIGHT - Game.GAME_WIDTH / 5 ,Game.GAME_WIDTH/5,Game.GAME_WIDTH / 5);
         newGame.setText("New Game");
         newGame.setBackground(Color.WHITE);
         newGame.setOpaque(true);
@@ -69,7 +78,7 @@ public class MainPanel extends JPanel {
 
     void initRecordLabel(){
         record = new JLabel();
-        record.setBounds(Game.GAME_WIDTH/4,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/4,Game.GAME_HEIGHT/6);
+        record.setBounds(Game.GAME_WIDTH/5,Game.GAME_HEIGHT - Game.GAME_WIDTH / 5 ,Game.GAME_WIDTH/5,Game.GAME_WIDTH / 5);
         record.setText("Your Record");
         record.setBackground(Color.WHITE);
         record.setOpaque(true);
@@ -81,7 +90,7 @@ public class MainPanel extends JPanel {
 
     void initHistoryButton(){
         history = new JButton();
-        history.setBounds(Game.GAME_WIDTH/4 * 2,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/4,Game.GAME_HEIGHT/6);
+        history.setBounds(Game.GAME_WIDTH/5 * 2,Game.GAME_HEIGHT - Game.GAME_WIDTH / 5 ,Game.GAME_WIDTH/5,Game.GAME_WIDTH / 5);
         history.setText("History");
         history.setBackground(Color.WHITE);
         history.setOpaque(true);
@@ -94,7 +103,7 @@ public class MainPanel extends JPanel {
 
     void initSettingsButton(){
         settings = new JButton();
-        settings.setBounds(Game.GAME_WIDTH/4 * 3,Game.GAME_HEIGHT * 5 /6 ,Game.GAME_WIDTH/4,Game.GAME_HEIGHT/6);
+        settings.setBounds(Game.GAME_WIDTH/5 * 3,Game.GAME_HEIGHT - Game.GAME_WIDTH / 5 ,Game.GAME_WIDTH/5,Game.GAME_WIDTH / 5);
         settings.setText("Settings");
         settings.setBackground(Color.WHITE);
         settings.setOpaque(true);
@@ -103,6 +112,19 @@ public class MainPanel extends JPanel {
         settings.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
         settings.setFocusable(false);
         this.add(settings);
+    }
+
+    private void initExitButton() {
+        exit = new JButton();
+        exit.setBounds(Game.GAME_WIDTH/5 * 4,Game.GAME_HEIGHT - Game.GAME_WIDTH / 5 ,Game.GAME_WIDTH/5,Game.GAME_WIDTH / 5);
+        exit.setText("Exit");
+        exit.setBackground(Color.WHITE);
+        exit.setOpaque(true);
+        exit.setHorizontalTextPosition(JLabel.RIGHT);
+        exit.setVerticalTextPosition(JLabel.TOP);
+        exit.setBorder(BorderFactory.createLineBorder(Color.CYAN,2));
+        exit.setFocusable(false);
+        this.add(exit);
     }
 
     public void start() {
@@ -121,7 +143,7 @@ public class MainPanel extends JPanel {
                 points.add(Integer.valueOf(point));
             }
             if (points.isEmpty()){
-                record.setText("You Don't Have A Record!");
+                record.setText("No Record Yet!");
             }
             else {
                 record.setText("Your Record : " + GameHelper.Max(points));

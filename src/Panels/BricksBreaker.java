@@ -49,6 +49,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     public static Color speedItemColor = Color.RED;
     public static Color powerItemColor = Color.BLUE;
     public static Color dizzyItemColor = Color.YELLOW;
+    public static Color backwardColor = new Color(255 ,192 ,203);
     public GameLoop gameLoop;
     public static Clip clip;
 
@@ -69,6 +70,9 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        if (oigArrayList == null){
+            return;
+        }
         for (int i = 0 ;i <oigArrayList.size() ;i++){
             if (oigArrayList.get(i).isVisible) {
                 oigArrayList.get(i).draw(g);
@@ -151,7 +155,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             oigArrayList.add(new Brick(randoms.get(i) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,null));
         }
         Random random = new Random();
-        int itemPossibility = random.nextInt(200);
+        int itemPossibility = random.nextInt(230);
         Item item;
         if (itemPossibility < 90) {
             item = new BallItem(0, 0);
@@ -166,10 +170,14 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
             oigArrayList.add(new SpeedItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
         else if (itemPossibility < 180) {
+            item = new BackwardItem(0, 0);
+            oigArrayList.add(new BackwardItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
+        }
+        else if (itemPossibility < 210) {
             item = new DizzyItem(0, 0);
             oigArrayList.add(new DizzyItem(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickWidth / 2 ,brickHeight / 2));
         }
-        else if (itemPossibility < 190){
+        else if (itemPossibility < 220){
             item = new EarthquakeItem();
             oigArrayList.add(new Brick(randoms.get(randoms.size() - 1) * GAME_WIDTH/6 + brickInitialX ,brickInitialY ,brickWidth ,brickHeight ,currentBricksHP ,(SpecialItem) item));
             ((EarthquakeItem) item).setBrick((Brick) oigArrayList.get(oigArrayList.size() - 1));
@@ -355,6 +363,7 @@ public class BricksBreaker extends JPanel implements MouseMotionListener,MouseLi
         speedItemColor = Color.RED;
         powerItemColor = Color.BLUE;
         dizzyItemColor = Color.YELLOW;
+        backwardColor = new Color(255 ,192 ,203);
 
         if (Game.SongTheme){
             clip.stop();

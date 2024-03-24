@@ -211,4 +211,22 @@ public class GamePrepPanel extends JPanel {
         initStartGame();
         setActionListeners();
     }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setFont(new Font(null ,Font.BOLD ,20));
+        g.setColor(Color.GREEN);
+        g.fillOval(10 ,Game.GAME_HEIGHT / 28 ,Game.GAME_WIDTH / 28 ,Game.GAME_HEIGHT / 28);
+        g.drawString(" : New Ball" ,Game.GAME_HEIGHT / 28 + 10 ,Game.GAME_HEIGHT / 28 * 7 / 4);
+        g.setColor(Color.RED);
+        g.fillOval(Game.GAME_HEIGHT / 28 * 5 + 20 ,Game.GAME_HEIGHT / 28 ,Game.GAME_WIDTH / 28 ,Game.GAME_HEIGHT / 28);
+        g.drawString(" : Speed" ,Game.GAME_HEIGHT / 28 * 6 + 20 ,Game.GAME_HEIGHT / 28 * 7 / 4);
+        g.setColor(Color.BLUE);
+        g.fillOval(Game.GAME_HEIGHT / 28 * 10 + 10 ,Game.GAME_HEIGHT / 28 ,Game.GAME_WIDTH / 28 ,Game.GAME_HEIGHT / 28);
+        g.drawString(" : Extra Damage" ,Game.GAME_HEIGHT / 28 * 11 + 10 ,Game.GAME_HEIGHT / 28 * 7 / 4);
+        g.setColor(Color.YELLOW);
+        g.fillOval(Game.GAME_HEIGHT / 28 * 17 + 10 ,Game.GAME_HEIGHT / 28 ,Game.GAME_WIDTH / 28 ,Game.GAME_HEIGHT / 28);
+        g.drawString(" : Dizzy" ,Game.GAME_HEIGHT / 28 * 18 + 10 ,Game.GAME_HEIGHT / 28 * 7 / 4);
+    }
 }

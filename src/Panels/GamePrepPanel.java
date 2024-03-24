@@ -229,10 +229,10 @@ public class GamePrepPanel extends JPanel {
         g.fillOval(Game.GAME_HEIGHT / 28 * 17 + 10 ,Game.GAME_HEIGHT / 28 ,Game.GAME_HEIGHT / 28 ,Game.GAME_HEIGHT / 28);
         g.drawString(" : Dizzy" ,Game.GAME_HEIGHT / 28 * 18 + 10 ,Game.GAME_HEIGHT / 28 * 7 / 4);
         g.setColor(new Color(255 ,192 ,203));
-        g.fillOval(Game.GAME_HEIGHT / 28 + 25 ,Game.GAME_HEIGHT / 28 * 26 + 8 ,Game.GAME_HEIGHT / 28 ,Game.GAME_HEIGHT / 28);
+        g.fillOval(Game.GAME_HEIGHT / 28 + 25 + 20 ,Game.GAME_HEIGHT / 28 * 26 + 8 ,Game.GAME_HEIGHT / 28 ,Game.GAME_HEIGHT / 28);
         g.drawString(" : Backwards" ,Game.GAME_HEIGHT / 28 * 3 ,Game.GAME_HEIGHT / 28 * 27);
         g.setColor(Color.MAGENTA);
-        g.drawString("DANCE" ,Game.GAME_HEIGHT / 28 * 10 ,Game.GAME_HEIGHT / 28 * 27);
-        g.drawString("QUAKE" ,Game.GAME_HEIGHT / 28 * 15 ,Game.GAME_HEIGHT / 28 * 27);
+        g.drawString("DANCE" ,Game.GAME_HEIGHT / 28 * 10 + 20 ,Game.GAME_HEIGHT / 28 * 27);
+        g.drawString("QUAKE" ,Game.GAME_HEIGHT / 28 * 15 + 20 ,Game.GAME_HEIGHT / 28 * 27);
     }
 }

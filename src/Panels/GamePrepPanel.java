@@ -113,6 +113,19 @@ public class GamePrepPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (userNameT.getText().length() != 0){
                     Game.playerName = userNameT.getText();
+                    while (Game.playerName.contains(" ")){
+                        String answer;
+                        answer = Game.playerName.substring(0 ,Game.playerName.indexOf(" "));
+                        if (Game.playerName.indexOf(" ") == Game.playerName.length() - 1){
+                            Game.playerName = answer;
+                            break;
+                        }
+                        answer += Game.playerName.substring(Game.playerName.indexOf(" ") + 1);
+                        Game.playerName = answer;
+                    }
+                    if (Game.playerName.equals("")){
+                        Game.playerName = "BackSpace:)";
+                    }
                     Game.gamePrepPanel.setVisible(false);
                     Game.gamePanel.start();
                 }
@@ -230,7 +243,7 @@ public class GamePrepPanel extends JPanel {
         g.drawString(" : Dizzy" ,Game.GAME_HEIGHT / 28 * 18 + 10 ,Game.GAME_HEIGHT / 28 * 7 / 4);
         g.setColor(new Color(255 ,192 ,203));
         g.fillOval(Game.GAME_HEIGHT / 28 + 25 + 20 ,Game.GAME_HEIGHT / 28 * 26 + 8 ,Game.GAME_HEIGHT / 28 ,Game.GAME_HEIGHT / 28);
-        g.drawString(" : Backwards" ,Game.GAME_HEIGHT / 28 * 3 ,Game.GAME_HEIGHT / 28 * 27);
+        g.drawString(" : Backwards" ,Game.GAME_HEIGHT / 28 * 3 + 20 ,Game.GAME_HEIGHT / 28 * 27);
         g.setColor(Color.MAGENTA);
         g.drawString("DANCE" ,Game.GAME_HEIGHT / 28 * 10 + 20 ,Game.GAME_HEIGHT / 28 * 27);
         g.drawString("QUAKE" ,Game.GAME_HEIGHT / 28 * 15 + 20 ,Game.GAME_HEIGHT / 28 * 27);
